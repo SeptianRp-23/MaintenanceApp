@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.azis.skripsiproject">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Login.LoginActivity"></activity>
+        <activity android:name=".UserActivity.Status.DetailsPengajuan.DetailStatusActivity" />
+        <activity android:name=".UserActivity.Status.StatusActivity" />
+        <activity android:name=".UserActivity.Laporan.LaporanActivity" />
+        <activity android:name=".UserActivity.Dashboard.User.ProfileActivity" />
+        <activity android:name=".UserActivity.Dashboard.Pengajuan.BuatPengajuanActivity" />
+        <activity android:name=".UserActivity.Dashboard.DashboardActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
