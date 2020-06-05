@@ -1,10 +1,13 @@
-package com.azis.skripsiproject.UserActivity.Dashboard.User;
+package com.azis.skripsiproject.User.Dashboard.User;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.azis.skripsiproject.R;
+import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -12,5 +15,9 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+    }
+
+    public void back(View view) {
+        startActivity(new Intent(ProfileActivity.this, DashboardActivity.class));
     }
 }

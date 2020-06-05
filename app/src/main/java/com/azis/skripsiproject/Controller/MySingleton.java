@@ -1,4 +1,4 @@
-package com.azis.skripsiproject.Controller.Data;
+package com.azis.skripsiproject.Controller;
 
 import android.content.Context;
 

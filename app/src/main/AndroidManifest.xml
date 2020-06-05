@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.azis.skripsiproject">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,14 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login.LoginActivity"></activity>
-        <activity android:name=".UserActivity.Status.DetailsPengajuan.DetailStatusActivity" />
-        <activity android:name=".UserActivity.Status.StatusActivity" />
-        <activity android:name=".UserActivity.Laporan.LaporanActivity" />
-        <activity android:name=".UserActivity.Dashboard.User.ProfileActivity" />
-        <activity android:name=".UserActivity.Dashboard.Pengajuan.BuatPengajuanActivity" />
-        <activity android:name=".UserActivity.Dashboard.DashboardActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Admin.Akun.AdmAkunActivity"></activity>
+        <activity android:name=".Admin.Laporan.AdmLaporanActivity" />
+        <activity android:name=".Admin.Dashboard.AdmDashboardActivity" />
+        <activity android:name=".Admin.Akun.AdmTambahAdminActivity" />
+        <activity android:name=".User.Status.DetailsPengajuan.DetailStatusActivity" />
+        <activity android:name=".SplashActivity" />
+        <activity android:name=".User.Status.StatusActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".User.Laporan.LaporanActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".User.Dashboard.User.ProfileActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".User.Dashboard.Pengajuan.BuatPengajuanActivity" />
+        <activity android:name=".User.Dashboard.DashboardActivity"/>
+        <activity android:name=".Login.LoginActivity"
+            android:theme="@style/Custom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

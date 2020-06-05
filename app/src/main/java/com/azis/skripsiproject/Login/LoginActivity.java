@@ -2,15 +2,18 @@ package com.azis.skripsiproject.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,8 +24,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.azis.skripsiproject.R;
-import com.azis.skripsiproject.SessionManager;
-import com.azis.skripsiproject.UserActivity.Dashboard.DashboardActivity;
+import com.azis.skripsiproject.Controller.SessionManager;
+import com.azis.skripsiproject.Server.Api;
+import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,13 +37,14 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText email, password;
-    private Button btn_login;
-    private ProgressBar loading;
-    public boolean doubleTapParam = false;
+    private EditText etEmail, etPass;
+    private Button btLogin;
     SessionManager sessionManager;
     SharedPreferences sharedPreferences;
     CheckBox ceklist;
+    RelativeLayout btRegist;
+    private String LoginAPI = Api.URL_API + "loginSession.php";
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,27 +55,28 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
 
 
-        email = findViewById(R.id.email_id);
-        password = findViewById(R.id.password_id);
-        btn_login = findViewById(R.id.btnLogin);
+        etEmail = findViewById(R.id.log_email);
+        etPass = findViewById(R.id.log_pass);
+        btLogin = findViewById(R.id.btnLogin);
         ceklist = findViewById(R.id.state);
+        btRegist = findViewById(R.id.register);
 
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mEmail = email.getText().toString().trim();
-                String mPass = password.getText().toString().trim();
+                String mEmail = etEmail.getText().toString().trim();
+                String mPass = etPass.getText().toString().trim();
 
-                if (email.getText().toString().length()==0){
-                    email.setError("Null Email");
+                if (etEmail.getText().toString().length()==0){
+                    etEmail.setError("Null Email");
                 }
-                else if (password.getText().toString().length()==0){
-                    password.setError("Null Password");
+                else if (etPass.getText().toString().length()==0){
+                    etPass.setError("Null Password");
                 }
                 else{
 
-                    Login(mEmail, mPass);
+                    loginProces(mEmail, mPass);
                 }
             }
         });
@@ -83,86 +89,162 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void Login(final String email, final String password) {
-        loading.setVisibility(View.VISIBLE);
-        btn_login.setVisibility(View.GONE);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "URL_LOGIN_USER",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String success = jsonObject.getString("success");
-                            JSONArray jsonArray = jsonObject.getJSONArray("login");
+    private void loginProces(final String email, final String password) {
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        final Handler handler = new Handler();
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setTitle("Loading...");
+        progressDialog.show();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, LoginAPI,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    String success = jsonObject.getString("success");
+                                    JSONArray jsonArray = jsonObject.getJSONArray("login");
+                                    if (success.equals("1")) {
+                                        for (int i = 0; i < jsonArray.length(); i++) {
 
-                            if (success.equals("1")) {
+                                            JSONObject object = jsonArray.getJSONObject(i);
+                                            String name = object.getString("name").trim();
+                                            String email = object.getString("email").trim();
+                                            String id = object.getString("id").trim();
 
-                                for (int i = 0; i < jsonArray.length(); i++) {
-
-                                    JSONObject object = jsonArray.getJSONObject(i);
-
-                                    String name = object.getString("name").trim();
-                                    String email = object.getString("email").trim();
-                                    String level = object.getString("level").trim();
-                                    String id = object.getString("id").trim();
-
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    if (ceklist.isChecked() && level.equals("user")){
-                                        editor.putString(getResources().getString(R.string.prefLoginState),"LoggedIn");
-                                    }else if (ceklist.isChecked() && level.equals("admin")){
-                                        editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOn");
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            if (ceklist.isChecked()){
+                                                editor.putString(getResources().getString(R.string.prefLoginState),"LoggedIn");
+                                            }
+                                            else {
+                                                editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOut");
+                                            }
+                                            sessionManager.createSession(name, email,id);
+                                            editor.apply();
+                                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                            intent.putExtra("name", name);
+                                            intent.putExtra("email", email);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     }
-                                    else {
-                                        editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOut");
-                                    }
-
-                                    if (level.equals("user")){
-                                        sessionManager.createSession(name, email, level, id);
-                                        editor.apply();
-                                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                                        intent.putExtra("name", name);
-                                        intent.putExtra("email", email);
-                                        startActivity(intent);
-                                        finish();
-
-                                    }
-                                    else if (level.equals("admin")){
-                                        sessionManager.createSession(name, email, level, id);
-                                        editor.apply();
-                                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                                        intent.putExtra("name", name);
-                                        intent.putExtra("email", email);
-                                        startActivity(intent);
-                                        finish();
-                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    progressDialog.dismiss();
+                                    Toast.makeText(LoginActivity.this, "Error, Email Or Password", Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            loading.setVisibility(View.GONE);
-                            btn_login.setVisibility(View.VISIBLE);
-                            Toast.makeText(LoginActivity.this, "Error, Email Or Password", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
+                                Toast.makeText(LoginActivity.this, "Error, Check Connection" +error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        loading.setVisibility(View.GONE);
-                        btn_login.setVisibility(View.VISIBLE);
-                        Toast.makeText(LoginActivity.this, "Error, Check Connection" +error.toString(), Toast.LENGTH_SHORT).show();
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("email", email);
+                        params.put("password", password);
+                        return params;
                     }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("password", password);
-                return params;
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+                requestQueue.add(stringRequest);
             }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        }, 2000);
+
     }
+
+    @Override
+    public void onBackPressed() {
+        progressDialog.dismiss();
+    }
+
+//    private void Login(final String email, final String password) {
+//        loading.setVisibility(View.VISIBLE);
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, "URL_LOGIN_USER",
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            String success = jsonObject.getString("success");
+//                            JSONArray jsonArray = jsonObject.getJSONArray("login");
+//
+//                            if (success.equals("1")) {
+//
+//                                for (int i = 0; i < jsonArray.length(); i++) {
+//
+//                                    JSONObject object = jsonArray.getJSONObject(i);
+//
+//                                    String name = object.getString("name").trim();
+//                                    String email = object.getString("email").trim();
+//                                    String level = object.getString("level").trim();
+//                                    String id = object.getString("id").trim();
+//
+//                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                                    if (ceklist.isChecked() && level.equals("user")){
+//                                        editor.putString(getResources().getString(R.string.prefLoginState),"LoggedIn");
+//                                    }else if (ceklist.isChecked() && level.equals("admin")){
+//                                        editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOn");
+//                                    }
+//                                    else {
+//                                        editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOut");
+//                                    }
+//
+//                                    if (level.equals("user")){
+//                                        sessionManager.createSession(name, email, level, id);
+//                                        editor.apply();
+//                                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+//                                        intent.putExtra("name", name);
+//                                        intent.putExtra("email", email);
+//                                        startActivity(intent);
+//                                        finish();
+//
+//                                    }
+//                                    else if (level.equals("admin")){
+//                                        sessionManager.createSession(name, email, level, id);
+//                                        editor.apply();
+//                                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+//                                        intent.putExtra("name", name);
+//                                        intent.putExtra("email", email);
+//                                        startActivity(intent);
+//                                        finish();
+//                                    }
+//                                }
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                            loading.setVisibility(View.GONE);
+//                            btn_login.setVisibility(View.VISIBLE);
+//                            Toast.makeText(LoginActivity.this, "Error, Email Or Password", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        loading.setVisibility(View.GONE);
+//                        btn_login.setVisibility(View.VISIBLE);
+//                        Toast.makeText(LoginActivity.this, "Error, Check Connection" +error.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//        {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("email", email);
+//                params.put("password", password);
+//                return params;
+//            }
+//        };
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        requestQueue.add(stringRequest);
+//    }
 }

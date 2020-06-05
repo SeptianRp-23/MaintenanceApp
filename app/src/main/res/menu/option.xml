@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="Edit"
+        android:icon="@drawable/ic_user"
+        app:showAsAction="always"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <menu>
+            <item
+                android:title="Account"
+                android:id="@+id/account"
+                android:icon="@drawable/ic_account"
+                app:showAsAction="never"/>
+            <item
+                android:title="Logout"
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_exit"
+                app:showAsAction="never"/>
+        </menu>
+
+    </item>
 </menu>

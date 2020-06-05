@@ -1,11 +1,11 @@
-package com.azis.skripsiproject;
+package com.azis.skripsiproject.Controller;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.azis.skripsiproject.Login.LoginActivity;
-import com.azis.skripsiproject.UserActivity.Dashboard.DashboardActivity;
+import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
 
 import java.util.HashMap;
 
@@ -21,7 +21,7 @@ public class SessionManager {
     public static final String LOGED = "IS_LOGED";
     public static final String NAME = "NAME";
     public static final String EMAIL = "EMAIL";
-    public static final String LEVEL = "LEVEL";
+//    public static final String LEVEL = "LEVEL";
     public static final String ID = "ID";
 
     public SessionManager(Context context) {
@@ -30,12 +30,12 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
-    public void createSession (String name, String email, String level, String id){
+    public void createSession (String name, String email, String id){
         editor.putBoolean(LOGIN, true);
         editor.putBoolean(LOGED, true);
         editor.putString(NAME, name);
         editor.putString(EMAIL, email);
-        editor.putString(LEVEL, level);
+//        editor.putString(LEVEL, level);
         editor.putString(ID, id);
         editor.apply();
     }
@@ -54,17 +54,17 @@ public class SessionManager {
         return sharedPreferences.getBoolean(LOGIN, false);
     }
 
-    public boolean isLogin2(){
-        return sharedPreferences.getBoolean(LOGED, false);
-    }
+//    public boolean isLogin2(){
+//        return sharedPreferences.getBoolean(LOGED, false);
+//    }
 
 
-    public void checkLogin(){
-        if (!this.isLogin()){
-            Intent intent = new Intent(context, LoginActivity.class);
-            context.startActivity(intent);
-            ((DashboardActivity) context).finish();
-        }
+//    public void checkLogin(){
+//        if (!this.isLogin()){
+//            Intent intent = new Intent(context, LoginActivity.class);
+//            context.startActivity(intent);
+//            ((DashboardActivity) context).finish();
+//        }
 
 //        if (LEVEL.equals("user")){
 //            this.isLogin();
@@ -78,15 +78,15 @@ public class SessionManager {
 //            context.startActivity(intent);
 //            ((HomeAdmin)context).finish();
 //        }
-    }
+//    }
 
-    public void checkLogin2(){
-        if (!this.isLogin2()){
-            Intent intent = new Intent(context, LoginActivity.class);
-            context.startActivity(intent);
-            ((DashboardActivity) context).finish();
-        }
-    }
+//    public void checkLogin2(){
+//        if (!this.isLogin2()){
+//            Intent intent = new Intent(context, LoginActivity.class);
+//            context.startActivity(intent);
+//            ((DashboardActivity) context).finish();
+//        }
+//    }
 
     public HashMap<String, String> getUserDetail(){
 
