@@ -5,24 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.Dashboard.AdmDashboardActivity">
+    tools:context=".User.Dashboard.Pengajuan.PengajuanBmnActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Admin Dashboard"
+        android:text="Pengajuan BMN"
         android:textSize="30dp"
-        android:id="@+id/txt"
+        android:textColor="@color/colorPrimary"
         android:layout_centerInParent="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/logout"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Logout"
-        android:background="@drawable/circle_primary"
-        android:textColor="@android:color/white"/>
 
 </RelativeLayout>

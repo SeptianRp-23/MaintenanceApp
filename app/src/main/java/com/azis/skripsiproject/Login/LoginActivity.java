@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.azis.skripsiproject.Admin.Dashboard.AdmDashboardActivity;
 import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.Server.Api;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     CheckBox ceklist;
     RelativeLayout btRegist;
-    private String LoginAPI = Api.URL_API + "loginSession.php";
+    private String LoginAPI = Api.URL_API + "login.php";
     ProgressDialog progressDialog;
 
     @Override
@@ -85,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
         }
         else if (loginstatus.equals("LoggedOn")){
-            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+            startActivity(new Intent(LoginActivity.this, AdmDashboardActivity.class));
         }
     }
 
@@ -111,24 +112,38 @@ public class LoginActivity extends AppCompatActivity {
                                         for (int i = 0; i < jsonArray.length(); i++) {
 
                                             JSONObject object = jsonArray.getJSONObject(i);
-                                            String name = object.getString("name").trim();
+                                            String nama = object.getString("nama").trim();
                                             String email = object.getString("email").trim();
+                                            String bagian = object.getString("bagian").trim();
+                                            String level = object.getString("level").trim();
                                             String id = object.getString("id").trim();
 
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                                            if (ceklist.isChecked()){
+                                            if (ceklist.isChecked() && level.equals("user")){
                                                 editor.putString(getResources().getString(R.string.prefLoginState),"LoggedIn");
-                                            }
-                                            else {
+                                            }else if (ceklist.isChecked() && level.equals("admin")){
+                                                editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOn");
+                                            }else{
                                                 editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOut");
                                             }
-                                            sessionManager.createSession(name, email,id);
-                                            editor.apply();
-                                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                                            intent.putExtra("name", name);
-                                            intent.putExtra("email", email);
-                                            startActivity(intent);
-                                            finish();
+
+                                            if (level.equals("user")) {
+                                                sessionManager.createSession(nama, email, bagian, level, id);
+                                                editor.apply();
+                                                final Intent inte = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                inte.putExtra("bagian", bagian);
+                                                inte.putExtra("email", email);
+                                                startActivity(inte);
+                                                finish();
+                                            }else if (level.equals("admin")){
+                                                sessionManager.createSession(nama, email, bagian, level, id);
+                                                editor.apply();
+                                                final Intent in = new Intent(LoginActivity.this, AdmDashboardActivity.class);
+                                                in.putExtra("nama", nama);
+                                                in.putExtra("email", email);
+                                                startActivity(in);
+                                                finish();
+                                            }
                                         }
                                     }
                                 } catch (JSONException e) {

@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.azis.skripsiproject.R;
 
-public class BuatPengajuanActivity extends AppCompatActivity {
+public class PengajuanBmnActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buat_pengajuan);
+        setContentView(R.layout.activity_pengajuan_bmn);
     }
 }
