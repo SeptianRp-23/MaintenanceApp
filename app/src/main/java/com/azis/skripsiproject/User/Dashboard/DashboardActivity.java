@@ -11,18 +11,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.Login.LoginActivity;
 import com.azis.skripsiproject.R;
-import com.azis.skripsiproject.User.Dashboard.Pengajuan.PengajuanBmnActivity;
+import com.azis.skripsiproject.User.Dashboard.Pengajuan.PilihBarangActivity;
 import com.azis.skripsiproject.User.Dashboard.Pengajuan.PengajuanFamumActivity;
 import com.azis.skripsiproject.User.Dashboard.User.ProfileActivity;
 import com.azis.skripsiproject.User.Laporan.LaporanActivity;
@@ -73,7 +68,7 @@ public class DashboardActivity extends AppCompatActivity {
         cBmn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DashboardActivity.this, PengajuanBmnActivity.class));
+                startActivity(new Intent(DashboardActivity.this, PilihBarangActivity.class));
             }
         });
 

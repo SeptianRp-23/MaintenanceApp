@@ -1,187 +1,115 @@
 package com.azis.skripsiproject.User.Dashboard.Pengajuan;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.azis.skripsiproject.Controller.AdapterDataAdmin;
-import com.azis.skripsiproject.Controller.DataItemAdmin;
-import com.azis.skripsiproject.Controller.SessionManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import com.azis.skripsiproject.R;
-import com.azis.skripsiproject.Server.Api;
-import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
-import com.rengwuxian.materialedittext.MaterialEditText;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class PengajuanBmnActivity extends AppCompatActivity {
 
-    SessionManager sessionManager;
-    String getId;
-    ListView listViewAdm;
-    AdapterDataAdmin adapterDataAdmin;
-    public static ArrayList<DataItemAdmin> dataItemAdminArrayList = new ArrayList<>();
-    private String ShowBarang = Api.URL_API + "showBarang.php";
-    DataItemAdmin dataItemAdmin;
-    MaterialEditText cari;
-
+    String myFormat = "dd-MM-yyy hh:mm a";
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+    private static final String TAG = "PengajuanBmnActivity";
+    int position;
+    EditText etNo, etjenis, etTipe, etPengguna, etTanggal, etUraian, etkomponen, etbiaya;
+    ImageView imgbawah1,imgatas1,imgbawah2,imgatas2,imgbawah3,imgatas3,imgfoto;
+    Button btnpilih,btnkirim;
+    LinearLayout lin1, lin2, lin3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pengajuan_bmn);
 
-        sessionManager = new SessionManager(this);
+        etNo = findViewById(R.id.et_noBmn);
+        etjenis = findViewById(R.id.et_jenis);
+        etTipe = findViewById(R.id.et_tipe);
+        etPengguna = findViewById(R.id.et_pengguna);
 
-        HashMap<String, String> user = sessionManager.getUserDetail();
-        getId = user.get(SessionManager.ID);
+        //attribut 1
+        imgatas1 = findViewById(R.id.show1_2);
+        imgbawah1 = findViewById(R.id.show1);
+        lin1 = findViewById(R.id.linear1);
 
-        listViewAdm = findViewById(R.id.myListviewAdm);
-        adapterDataAdmin = new AdapterDataAdmin(this, dataItemAdminArrayList);
-        listViewAdm.setAdapter(adapterDataAdmin);
-
-        listViewAdm.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        imgbawah1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                ProgressDialog progressDialog = new ProgressDialog(view.getContext());
+            public void onClick(View v) {
+                lin1.setVisibility(View.VISIBLE);
+                imgatas1.setVisibility(View.VISIBLE);
+                imgbawah1.setVisibility(View.GONE);
+            }
+        });
 
-                CharSequence[] dialogItem = {"View Data", "Edit Data", "Delete Data"};
-                builder.setTitle(dataItemAdminArrayList.get(position).getPengguna());
-                builder.setItems(dialogItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        switch (i) {
-                            case 0:
-                                startActivity(new Intent(getApplicationContext(), PilihBmnActivity.class)
-                                        .putExtra("position", position));
-                                break;
-                            case 1:
-                                break;
-                            case 2:
-                                break;
-                        }
-                    }
-                });
-                builder.create().show();
+        imgatas1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lin1.setVisibility(View.GONE);
+                imgatas1.setVisibility(View.GONE);
+                imgbawah1.setVisibility(View.VISIBLE);
             }
         });
 
 
-        receiveData();
-    }
+//        attribut 2
+        lin2 = findViewById(R.id.linear2);
+        imgatas2 = findViewById(R.id.show2_2);
+        imgbawah2 = findViewById(R.id.show2);
 
-    public void receiveData(){
-        StringRequest request = new StringRequest(Request.Method.POST, ShowBarang,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        dataItemAdminArrayList.clear();
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String sucess = jsonObject.getString("success");
-                            JSONArray jsonArray = jsonObject.getJSONArray("read");
-
-                            if (sucess.equals("1")){
-                                for (int i = 0; i < jsonArray.length(); i++){
-                                    JSONObject object = jsonArray.getJSONObject(i);
-
-                                    String id = object.getString("id");
-                                    String no_inventaris = object.getString("no_inventaris");
-                                    String jenis = object.getString("jenis");
-                                    String tipe = object.getString("tipe");
-                                    String tanggal = object.getString("tanggal");
-                                    String pengguna = object.getString("pengguna");
-
-                                    dataItemAdmin = new DataItemAdmin(id, no_inventaris, jenis, tipe, tanggal, pengguna);
-                                    dataItemAdminArrayList.add(dataItemAdmin);
-                                    adapterDataAdmin.notifyDataSetChanged();
-                                }
-                            }
-                        }
-                        catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PengajuanBmnActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                })
-        {
+        imgbawah2.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("id", getId);
-                return params;
+            public void onClick(View v) {
+                lin2.setVisibility(View.VISIBLE);
+                imgatas2.setVisibility(View.VISIBLE);
+                imgbawah2.setVisibility(View.GONE);
             }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(request);
-    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.search_item, menu);
-//
-//        final MenuItem searchItem = menu.findItem(R.id.item_search);
-//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//
-//                ArrayList<String> dataList = new ArrayList<>();
-//                for (String data : dataItemAdminArrayList){
-//                    if (data.toLowerCase().contains(newText.toLowerCase())){
-//                        listViewAdm.add(data);
-//                    }
-//                }
-//                return true;
-//
-//            }
-//        });
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
+        });
 
-    public void back(View view) {
-        startActivity(new Intent(PengajuanBmnActivity.this, DashboardActivity.class));
+        imgatas2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lin2.setVisibility(View.GONE);
+                imgatas2.setVisibility(View.GONE);
+                imgbawah2.setVisibility(View.VISIBLE);
+            }
+        });
+
+//        attribut 3
+        lin3 = findViewById(R.id.linear3);
+        imgbawah3 = findViewById(R.id.show3);
+        imgatas3 = findViewById(R.id.show3_2);
+
+        imgbawah3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lin3.setVisibility(View.VISIBLE);
+                imgatas3.setVisibility(View.VISIBLE);
+                imgbawah3.setVisibility(View.GONE);
+            }
+        });
+
+        imgatas3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lin3.setVisibility(View.GONE);
+                imgatas3.setVisibility(View.GONE);
+                imgbawah3.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //SetData
+        Intent intent = getIntent();
+        position = intent.getExtras().getInt("position");
+        etNo.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getNo_inventaris());
+        etjenis.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getJenis());
+        etTipe.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getTipe());
+        etPengguna.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getPengguna());
     }
 }

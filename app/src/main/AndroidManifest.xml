@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".User.Dashboard.Pengajuan.PilihBmnActivity"></activity>
-        <activity android:name=".User.Dashboard.Pengajuan.PengajuanBmnActivity"
+        <activity android:name=".User.Dashboard.Pengajuan.PengajuanBmnActivity"></activity>
+        <activity android:name=".User.Dashboard.Pengajuan.PilihBarangActivity"
             android:theme="@style/Custom"/>
         <activity android:name=".Admin.Akun.AdmAkunActivity" />
         <activity android:name=".Admin.Laporan.AdmLaporanActivity" />
