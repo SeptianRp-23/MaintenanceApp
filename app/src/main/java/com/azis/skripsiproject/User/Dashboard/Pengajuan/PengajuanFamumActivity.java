@@ -13,7 +13,7 @@ import com.azis.skripsiproject.R;
 
 public class PengajuanFamumActivity extends AppCompatActivity {
 
-    EditText etjenis,etnama,ettahun,eturaian,etpengguna,etkomponen,etbiaya;
+    EditText etjenis,etnama,ettanggal,eturaian,etpengguna,etkomponen,etbiaya;
     ImageView imgbawah1,imgatas1,imgbawah2,imgatas2,imgbawah3,imgatas3,imgfoto;
     Button btnpilih,btnkirim;
     LinearLayout lin1, lin2, lin3;
