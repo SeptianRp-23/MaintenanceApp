@@ -2,18 +2,19 @@ package com.azis.skripsiproject.Controller;
 
 public class DataItemAdmin {
 
-    private String id, no_inventaris, jenis, tipe, tanggal, pengguna;
+    private String id, no_inventaris, jenis, tipe, tanggal, pengguna, pokja;
 
     public DataItemAdmin() {
     }
 
-    public DataItemAdmin(String id, String no_inventaris, String jenis, String tipe, String tanggal, String pengguna) {
+    public DataItemAdmin(String id, String no_inventaris, String jenis, String tipe, String tanggal, String pengguna, String pokja) {
         this.id = id;
         this.no_inventaris = no_inventaris;
         this.jenis = jenis;
         this.tipe = tipe;
         this.tanggal = tanggal;
         this.pengguna = pengguna;
+        this.pokja = pokja;
     }
 
     public String getId() {
@@ -40,6 +41,10 @@ public class DataItemAdmin {
         return pengguna;
     }
 
+    public String getPokja() {
+        return pokja;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -62,5 +67,9 @@ public class DataItemAdmin {
 
     public void setPengguna(String pengguna) {
         this.pengguna = pengguna;
+    }
+
+    public void setPokja(String pokja) {
+        this.pokja = pokja;
     }
 }

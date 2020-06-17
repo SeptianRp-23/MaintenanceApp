@@ -3,6 +3,12 @@
     package="com.azis.skripsiproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -10,14 +16,33 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".User.Dashboard.Pengajuan.PengajuanBmnActivity"></activity>
-        <activity android:name=".User.Dashboard.Pengajuan.PilihBarangActivity"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Admin.Laporan.AdmLaporanSelesai"></activity>
+        <activity android:name=".Admin.Perbaikan.AdmDetailPerbaikan"
             android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Akun.AdmAkunActivity" />
-        <activity android:name=".Admin.Laporan.AdmLaporanActivity" />
-        <activity android:name=".Admin.Dashboard.AdmDashboardActivity" />
-        <activity android:name=".Admin.Akun.AdmTambahAdminActivity" />
+        <activity android:name=".Admin.Perbaikan.AdmDataPerbaikanActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".Admin.Peminjaman.AdmTambahPeminjaman"
+            android:theme="@style/Custom"/>
+        <activity android:name=".Admin.Peminjaman.AdmDetailPeminjaman"
+            android:theme="@style/Custom"/>
+        <activity android:name=".Admin.Peminjaman.AdmPeminjamanActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".Admin.Dashboard.Barang.AdmDataBarangActivity"
+            android:theme="@style/Custom"/>
+        <activity
+            android:name=".User.Dashboard.Pengajuan.PilihBarangActivity"
+            android:theme="@style/Custom" />
+        <activity android:name=".Admin.Profile.AdmAkunActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".Admin.Laporan.AdmLaporanActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".Admin.Dashboard.AdmDashboardActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".Admin.Profile.AdmTambahAdminActivity"
+            android:theme="@style/Custom"/>
+        <activity android:name=".User.Dashboard.Pengajuan.PengajuanBmnActivity" />
         <activity android:name=".User.Status.DetailsPengajuan.DetailStatusActivity" />
         <activity android:name=".SplashActivity" />
         <activity

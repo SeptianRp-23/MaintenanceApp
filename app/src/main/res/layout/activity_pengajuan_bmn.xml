@@ -31,7 +31,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data Barang"
+                    android:text="Data Pengajjuan"
                     android:layout_marginLeft="10dp"
                     android:textStyle="bold"/>
 
@@ -60,9 +60,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/linear1">
 
+                <EditText
+                    android:id="@+id/et_idUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Id User"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+                <EditText
+                    android:id="@+id/et_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nama"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
 
                 <EditText
                     android:id="@+id/et_noBmn"
@@ -97,6 +114,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Pengguna"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+                <EditText
+                    android:id="@+id/et_pokja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pokja"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -150,18 +176,18 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:id="@+id/linear2"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <ImageView
-                    android:id="@+id/btn_camera"
+                    android:id="@+id/img"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_camera"/>
 
                 <Button
-                    android:id="@+id/btn_capture"
+                    android:id="@+id/btn_chose"
                     android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
@@ -183,6 +209,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tanggal Pengajuan"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+                <EditText
+                    android:id="@+id/et_kerusakan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Kerusakann"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -259,12 +294,13 @@
                 android:id="@+id/linear3"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nama Komponen Yang Diganti"
+                    android:id="@+id/komponen"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -273,6 +309,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Perkiraan Biaya"
+                    android:id="@+id/biaya"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />

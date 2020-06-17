@@ -113,8 +113,9 @@ public class PilihBarangActivity extends AppCompatActivity {
                                     String tipe = object.getString("tipe");
                                     String tanggal = object.getString("tanggal");
                                     String pengguna = object.getString("pengguna");
+                                    String pokja = object.getString("pokja");
 
-                                    dataItemAdmin = new DataItemAdmin(id, no_inventaris, jenis, tipe, tanggal, pengguna);
+                                    dataItemAdmin = new DataItemAdmin(id, no_inventaris, jenis, tipe, tanggal, pengguna, pokja);
                                     dataItemAdminArrayList.add(dataItemAdmin);
                                     adapterDataAdmin.notifyDataSetChanged();
                                 }
