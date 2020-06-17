@@ -31,7 +31,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data Barang"
+                    android:text="Data Fasilitas"
                     android:layout_marginLeft="10dp"
                     android:textStyle="bold"/>
 
@@ -68,7 +68,7 @@
                     android:id="@+id/et_jenis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Jenis Barang"
+                    android:hint="Jenis Fasilitas"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -77,7 +77,7 @@
                     android:id="@+id/et_nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama Barang"
+                    android:hint="Nama Fasilitas"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -86,7 +86,7 @@
                     android:id="@+id/et_tahun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tahun Perolehan"
+                    android:hint="Tanggal Pengajuan"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -172,7 +172,7 @@
                     android:id="@+id/et_pengguna"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama Pengguna"
+                    android:hint="Lokasi Kerusakan"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
