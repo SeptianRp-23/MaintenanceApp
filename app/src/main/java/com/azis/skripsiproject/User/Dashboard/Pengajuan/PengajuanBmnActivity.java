@@ -3,16 +3,18 @@ package com.azis.skripsiproject.User.Dashboard.Pengajuan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -40,13 +42,13 @@ import retrofit2.Response;
 
 public class PengajuanBmnActivity extends AppCompatActivity {
 
-    public static final int REQUEST_CODE_CAMERA = 001;
-    public static final int REQUEST_CODE_GALLERY = 002;
+    private static final int CAMERA_PIC_REQUEST = 7;
     String myFormat = "dd-MM-yyy hh:mm a";
+    Uri imageUri;
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
     private static final String TAG = "PengajuanBmnActivity";
     int position;
-    EditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya;
+    EditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
     ImageView imgbawah1, imgatas1, imgbawah2, imgatas2, imgbawah3, imgatas3, imgfoto;
     Button btChose, btKirim;
     LinearLayout lin1, lin2, lin3;
@@ -75,6 +77,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
         etTanggal = findViewById(R.id.et_tanggal);
         etkomponen = findViewById(R.id.komponen);
         etbiaya = findViewById(R.id.biaya);
+        etStatus = findViewById(R.id.status);
         btChose = findViewById(R.id.btn_chose);
         imgfoto = findViewById(R.id.img);
         btKirim = findViewById(R.id.btn_kirim);
@@ -224,6 +227,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
         String keterangan = etkomponen.getText().toString().trim();
         String biaya = etbiaya.getText().toString().trim();
         String gambar = null;
+        String status = etStatus.getText().toString().trim();
         if (bitmap == null) {
             gambar = "";
         } else {
@@ -232,7 +236,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-        Call<Data> call = apiInterface.insertData(key, idUser, namaUser, idBrg, jenis, tipe, pengguna, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar);
+        Call<Data> call = apiInterface.insertData(key, idUser, namaUser, idBrg, jenis, tipe, pengguna, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
 
         call.enqueue(new Callback<Data>() {
             @Override
@@ -273,10 +277,19 @@ public class PengajuanBmnActivity extends AppCompatActivity {
     }
 
     private void chooseFile() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+
+        ContentValues values = new ContentValues();
+//        values.put(MediaStore.Images.Media.TITLE, fileName);
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Image capture by camera");
+        imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+        startActivityForResult(intent, CAMERA_PIC_REQUEST);
 
 //        CharSequence[] item = {"Kamera", "Galeri"};
 //        AlertDialog.Builder request = new AlertDialog.Builder(this)
@@ -288,13 +301,13 @@ public class PengajuanBmnActivity extends AppCompatActivity {
 //                            case 0:
 //                                //Membuka Kamera Untuk Mengambil Gambar
 //                                EasyImage.openCamera(PengajuanBmnActivity.this, REQUEST_CODE_CAMERA);
-//                                //        Intent intent = new Intent();
-////        intent.setType("image/*");
-////        intent.setAction(Intent.ACTION_GET_CONTENT);
-////        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+////                                        Intent intent = new Intent();
+////                                        intent.setType("image/*");
+////                                        intent.setAction(Intent.ACTION_GET_CONTENT);
+////                                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
 //                                break;
 //                            case 1:
-//                                //Membuaka Galeri Untuk Mengambil Gambar
+////                                //Membuaka Galeri Untuk Mengambil Gambar
 //                                EasyImage.openGallery(PengajuanBmnActivity.this, REQUEST_CODE_GALLERY);
 //                                break;
 //                        }
@@ -306,54 +319,39 @@ public class PengajuanBmnActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri filePath = data.getData();
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+//        if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+//            Uri filePath = data.getData();
+//            try {
+//
+//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+//
+//                imgfoto.setImageBitmap(bitmap);
+        if (resultCode == Activity.RESULT_OK)
             try {
+                if (bitmap != null) {
+                    bitmap.recycle();
+                }
 
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                String[] proj = {MediaStore.Images.Media.DATA};
+                Cursor cursor = managedQuery(imageUri, proj, null, null, null);
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                cursor.moveToFirst();
+//                imageUriString = cursor.getString(column_index);
 
-                imgfoto.setImageBitmap(bitmap);
+                getContentResolver().notifyChange(imageUri, null);
+                ContentResolver cr = getContentResolver();
 
-//            EasyImage.handleActivityResult(requestCode, resultCode, data, this, new EasyImage.Callbacks() {
-//
-//                @Override
-//                public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
-//                    //Method Ini Digunakan Untuk Menghandle Error pada Image
-//                }
-//
-//                @Override
-//                public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
-//                    //Method Ini Digunakan Untuk Menghandle Image
-//                    switch (type){
-//                        case REQUEST_CODE_CAMERA:
-//                            Glide.with(PengajuanBmnActivity.this)
-//                                    .load(imageFile)
-//                                    .centerCrop()
-//                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                                    .into(imgfoto);
-//                            break;
-//
-//                        case REQUEST_CODE_GALLERY:
-//                            Glide.with(PengajuanBmnActivity.this)
-//                                    .load(imageFile)
-//                                    .centerCrop()
-//                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                                    .into(imgfoto);
-//                            break;
-//                    }
-//                }
-//
-//                @Override
-//                public void onCanceled(EasyImage.ImageSource source, int type) {
-//                    //Batalkan penanganan, Anda mungkin ingin menghapus foto yang diambil jika dibatalkan
-//                }
-//            });
+                try {
+                    bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, imageUri);
+                    imgfoto.setImageBitmap(bitmap);
+
+                } catch (Exception e) {
+
+                }
             } catch (Exception e) {
 
             }
-        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

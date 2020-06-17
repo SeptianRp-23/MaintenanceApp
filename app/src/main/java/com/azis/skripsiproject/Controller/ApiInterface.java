@@ -7,7 +7,7 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
     @FormUrlEncoded
-    @POST("insertWithImage.php")
+    @POST("insertPerbaikan.php")
     Call<Data> insertData(
             @Field("key") String key,
             @Field("id_user") String idUser,
@@ -22,5 +22,6 @@ public interface ApiInterface {
             @Field("tanggal") String tanggal,
             @Field("keterangan") String keterangan,
             @Field("biaya") String biaya,
-            @Field("gambar") String gambar);
+            @Field("gambar") String gambar,
+            @Field("status") String status);
 }
