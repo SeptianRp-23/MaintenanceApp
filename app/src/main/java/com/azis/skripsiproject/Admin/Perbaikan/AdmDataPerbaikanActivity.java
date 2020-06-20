@@ -37,7 +37,7 @@ public class AdmDataPerbaikanActivity extends AppCompatActivity {
     ListView myList;
     AdapterPengajuan adapterPengajuan;
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
-    private String ShowBarang = Api.URL_LOCAL + "getPerbaikan.php";
+    private String ShowBarang = Api.URL_API + "getPengajuanAdm.php";
     DataItemPengajuan dataItemPengajuan;
 
     @Override

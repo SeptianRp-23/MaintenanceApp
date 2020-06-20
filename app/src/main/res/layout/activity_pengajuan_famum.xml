@@ -9,8 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/buttom_navigation">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,12 +62,11 @@
                 android:visibility="gone"
                 android:id="@+id/linear1">
 
-
                 <EditText
-                    android:id="@+id/et_jenis"
+                    android:id="@+id/et_idUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Jenis Fasilitas"
+                    android:hint="Id User"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -77,16 +75,63 @@
                     android:id="@+id/et_nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Nama"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+                <EditText
+                    android:id="@+id/et_noBmn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="-"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis Fasilitas"
+                    android:layout_marginLeft="25dp"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:id="@+id/listItem"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:entries="@array/daftar_list">
+
+                </Spinner>
+
+                <EditText
+                    android:id="@+id/et_tipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Nama Fasilitas"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
                 <EditText
-                    android:id="@+id/et_tahun"
+                    android:id="@+id/et_pengguna"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tanggal Pengajuan"
+                    android:text="-"
+                    android:visibility="gone"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+                <EditText
+                    android:id="@+id/et_pokja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="-"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -144,14 +189,14 @@
 
 
                 <ImageView
-                    android:id="@+id/btn_camera"
+                    android:id="@+id/img"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_camera"/>
 
                 <Button
-                    android:id="@+id/btn_capture"
+                    android:id="@+id/btn_chose"
                     android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
@@ -169,10 +214,19 @@
                     android:layout_marginTop="1dp" />
 
                 <EditText
-                    android:id="@+id/et_pengguna"
+                    android:id="@+id/et_tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Lokasi Kerusakan"
+                    android:hint="Tanggal Pengajuan"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+                <EditText
+                    android:id="@+id/et_kerusakan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Kerusakann"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -255,6 +309,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nama Komponen Yang Diganti"
+                    android:id="@+id/komponen"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -263,6 +318,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Perkiraan Biaya"
+                    android:id="@+id/biaya"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -281,8 +337,17 @@
             </LinearLayout>
 
             <!--            end bar 3-->
+
+
         </LinearLayout>
 
     </ScrollView>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menunggu Konfirmasi"
+        android:id="@+id/status"
+        android:visibility="gone"/>
 
 </RelativeLayout>

@@ -8,15 +8,40 @@
     android:layout_height="match_parent"
     tools:context=".User.Dashboard.DashboardActivity">
 
-
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="name"
-        android:id="@+id/bagian"
-        android:textColor="@android:color/black"
-        android:layout_centerHorizontal="true"/>
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bagian"
+            android:id="@+id/bagian"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/getId"
+            android:text="ID"
+            android:textSize="30sp"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/toolbar"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        android:id="@+id/card_luar">
 
         <androidx.cardview.widget.CardView
             android:layout_width="170dp"
@@ -25,7 +50,7 @@
             app:cardCornerRadius="8dp"
             android:id="@+id/cardBmn"
             android:visibility="gone"
-            android:layout_centerInParent="true">
+            android:layout_gravity="center">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +90,8 @@
             app:cardCornerRadius="8dp"
             android:id="@+id/cardFamum"
             android:visibility="gone"
-            android:layout_centerInParent="true">
+            android:layout_below="@+id/toolbar"
+            android:layout_gravity="center">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,6 +123,16 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/card_luar"
+        android:layout_above="@+id/buttom_navigation"
+        android:layout_marginTop="10dp"
+        android:id="@+id/list"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

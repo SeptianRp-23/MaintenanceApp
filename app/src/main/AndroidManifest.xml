@@ -43,10 +43,11 @@
         <activity android:name=".Admin.Profile.AdmTambahAdminActivity"
             android:theme="@style/Custom"/>
         <activity android:name=".User.Dashboard.Pengajuan.PengajuanBmnActivity" />
-        <activity android:name=".User.Status.DetailsPengajuan.DetailStatusActivity" />
+        <activity android:name=".User.Proses.DetailsPengajuan.ProsesStatusDetail"
+            android:theme="@style/Custom"/>
         <activity android:name=".SplashActivity" />
         <activity
-            android:name=".User.Status.StatusActivity"
+            android:name=".User.Proses.ProsesStatusActivity"
             android:theme="@style/Custom" />
         <activity
             android:name=".User.Laporan.LaporanActivity"
@@ -55,7 +56,8 @@
             android:name=".User.Dashboard.User.ProfileActivity"
             android:theme="@style/Custom" />
         <activity android:name=".User.Dashboard.Pengajuan.PengajuanFamumActivity" />
-        <activity android:name=".User.Dashboard.DashboardActivity" />
+        <activity android:name=".User.Dashboard.DashboardActivity"
+            android:theme="@style/Custom"/>
         <activity
             android:name=".Login.LoginActivity"
             android:theme="@style/Custom">

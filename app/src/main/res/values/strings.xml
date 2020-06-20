@@ -2,4 +2,15 @@
     <string name="app_name">SkripsiProject</string>
     <string name="prefLoginState">loginstate</string>
     <string name="register"><u>Register</u></string>
+    <string name="DiTolak">Periksa Kembali Data Yang Di Ajukan, Beberapa Data Tidak Bisa Kami Terima, Pastikan Kesesuaian Barang yang Di Ajukan Dengan Foto Yang Di Upload. Terimakasih</string>
+    <string-array name="daftar_list">
+        <item>Bakso</item>
+        <item>Ayam Goreng</item>
+        <item>Mie Rebus</item>
+        <item>Nasi Padang</item>
+        <item>Ikan Bakar</item>
+        <item>Seblak</item>
+        <item>Gorengan</item>
+        <item>Mie Ayam</item>
+    </string-array>
 </resources>

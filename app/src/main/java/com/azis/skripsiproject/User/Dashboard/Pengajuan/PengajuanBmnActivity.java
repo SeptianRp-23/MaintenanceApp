@@ -43,10 +43,10 @@ import retrofit2.Response;
 public class PengajuanBmnActivity extends AppCompatActivity {
 
     private static final int CAMERA_PIC_REQUEST = 7;
-    String myFormat = "dd-MM-yyy hh:mm a";
+//    String myFormat = "dd-MM-yyy hh:mm a";
     Uri imageUri;
-    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-    private static final String TAG = "PengajuanBmnActivity";
+//    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//    private static final String TAG = "PengajuanBmnActivity";
     int position;
     EditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
     ImageView imgbawah1, imgatas1, imgbawah2, imgatas2, imgbawah3, imgatas3, imgfoto;
@@ -54,8 +54,8 @@ public class PengajuanBmnActivity extends AppCompatActivity {
     LinearLayout lin1, lin2, lin3;
 
     private Bitmap bitmap;
-    private CircleImageView mPicture;
-    private FloatingActionButton mFabChoosePic;
+//    private CircleImageView mPicture;
+//    private FloatingActionButton mFabChoosePic;
     ApiInterface apiInterface;
     SessionManager sessionManager;
     String getId, getNama;
@@ -270,7 +270,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
 
     public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;

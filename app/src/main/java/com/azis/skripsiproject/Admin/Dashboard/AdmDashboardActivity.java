@@ -121,7 +121,9 @@ public class AdmDashboardActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOut");
         editor.apply();
-        startActivity(new Intent(AdmDashboardActivity.this, LoginActivity.class));
+        Intent i = new Intent(this, LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
         finish();
     }
 }

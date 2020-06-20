@@ -30,6 +30,17 @@
         android:layout_centerInParent="true"
         android:textSize="50dp"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_logout"
+        android:background="@drawable/circle_primary"
+        android:text="Logout"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/buttom_navigation"
+        android:layout_marginBottom="20dp"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
