@@ -18,33 +18,46 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Admin.Laporan.AdmLaporanSelesai"></activity>
-        <activity android:name=".Admin.Perbaikan.AdmDetailPerbaikan"
-            android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Perbaikan.AdmDataPerbaikanActivity"
-            android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Peminjaman.AdmTambahPeminjaman"
-            android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Peminjaman.AdmDetailPeminjaman"
-            android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Peminjaman.AdmPeminjamanActivity"
-            android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Dashboard.Barang.AdmDataBarangActivity"
-            android:theme="@style/Custom"/>
+        <activity android:name=".Admin.Peminjaman.PilihBarangActivity"
+            android:theme="@style/Custom"></activity>
+        <activity android:name=".Admin.Laporan.AdmLaporanSelesai" />
         <activity
-            android:name=".User.Dashboard.Pengajuan.PilihBarangActivity"
+            android:name=".Admin.Perbaikan.AdmDetailPerbaikan"
             android:theme="@style/Custom" />
-        <activity android:name=".Admin.Profile.AdmAkunActivity"
-            android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Laporan.AdmLaporanActivity"
-            android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Dashboard.AdmDashboardActivity"
-            android:theme="@style/Custom"/>
-        <activity android:name=".Admin.Profile.AdmTambahAdminActivity"
-            android:theme="@style/Custom"/>
+        <activity
+            android:name=".Admin.Perbaikan.AdmDataPerbaikanActivity"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Peminjaman.AdmTambahPeminjaman"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Peminjaman.AdmDetailPeminjaman"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Peminjaman.AdmPeminjamanActivity"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Dashboard.Barang.AdmDataBarangActivity"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".User.Dashboard.Pengajuan.PilihPenggunaActivity"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Profile.AdmAkunActivity"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Laporan.AdmLaporanActivity"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Dashboard.AdmDashboardActivity"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Profile.AdmTambahAdminActivity"
+            android:theme="@style/Custom" />
         <activity android:name=".User.Dashboard.Pengajuan.PengajuanBmnActivity" />
-        <activity android:name=".User.Proses.DetailsPengajuan.ProsesStatusDetail"
-            android:theme="@style/Custom"/>
+        <activity
+            android:name=".User.Proses.DetailsPengajuan.ProsesStatusDetail"
+            android:theme="@style/Custom" />
         <activity android:name=".SplashActivity" />
         <activity
             android:name=".User.Proses.ProsesStatusActivity"
@@ -56,8 +69,9 @@
             android:name=".User.Dashboard.User.ProfileActivity"
             android:theme="@style/Custom" />
         <activity android:name=".User.Dashboard.Pengajuan.PengajuanFamumActivity" />
-        <activity android:name=".User.Dashboard.DashboardActivity"
-            android:theme="@style/Custom"/>
+        <activity
+            android:name=".User.Dashboard.DashboardActivity"
+            android:theme="@style/Custom" />
         <activity
             android:name=".Login.LoginActivity"
             android:theme="@style/Custom">

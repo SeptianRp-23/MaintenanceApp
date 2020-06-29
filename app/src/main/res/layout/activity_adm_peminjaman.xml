@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Admin.Peminjaman.AdmPeminjamanActivity">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -33,18 +32,57 @@
                 android:text="Data Peminjaman"
                 android:layout_marginLeft="5dp"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
         </LinearLayout>
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Peminjaman"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        app:cardCornerRadius="90dp"
+        app:cardElevation="4dp"
+        android:id="@+id/card_add"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20sp"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_book_white"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buat Baru"
+                android:textStyle="bold"
+                android:textSize="10sp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="10dp"
+        android:id="@+id/list_peminjaman"/>
 
 </RelativeLayout>

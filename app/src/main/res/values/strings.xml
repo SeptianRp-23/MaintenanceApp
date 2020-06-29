@@ -7,4 +7,58 @@
         <item>Fasilitas 1</item>
         <item>Fasilitas 2</item>
     </string-array>
+
+    <string-array name="data_pokja">
+        <item>DB Edukasi, Sosialisasi, Partisipasi, dan Kemitraan</item>
+        <item>DB Konstruksi, Operasi, dan Pemeliharaan</item>
+        <item>DB Penelitian Dan Pengembangan</item>
+        <item>DP Perencanaan Dan Kerja Sama</item>
+        <item>KKK Edukasi dan Sosialisasi</item>
+        <item>KKK Kerja Teknik Restorasi</item>
+        <item>KKK Kerjasama</item>
+        <item>KKK Keuangan</item>
+        <item>KKK Partisipasi dan Kemitraan</item>
+        <item>KKK Penelitian Restorasi</item>
+        <item>KKK Pengawasan Internal</item>
+        <item>KKK Pengembangan Data</item>
+        <item>KKK Perencanaan Anggaran Dan Hukum</item>
+        <item>KKK Perencanaan</item>
+        <item>KKK Umum Dan Kepegawaian</item>
+        <item>KKK Wilayah Kalimantan dan Papua</item>
+        <item>KKK Wilayah Sumatera</item>
+        <item>KSK Administrasi Pengawasan</item>
+        <item>KSK Akuntansi dan Pelaporan Keuangan</item>
+        <item>KSK Edukasi, Sosialisasi, dan Pelatihan</item>
+        <item>KSK Hukum Dan Kebijakan</item>
+        <item>KSK Inventaris Pemetaan Dan Zonasi</item>
+        <item>KSK Jambi</item>
+        <item>KSK Kalimantan Barat</item>
+        <item>KSK Kalimantan Selatan</item>
+        <item>KSK Kalimantan Tengah</item>
+        <item>KSK Kemitraan, Resolusi Konflik Sosial, dan Pengaduan</item>
+        <item>KSK Kepegawaian</item>
+        <item>KSK Kerjasama Pendanaan</item>
+        <item>KSK Monitoring dan Evaluasi</item>
+        <item>KSK Papua</item>
+        <item>KSK Pelayanan Informasi dan Kehumasan</item>
+        <item>KSK Penelitian Kebijakaan Dan Sosial Ekonomi</item>
+        <item>KSK Penelitian Teknis Restorasi</item>
+        <item>KSK Pengelolaan Data Dan Informasi</item>
+        <item>KSK Peningkatan Partisipasi Desa Gambut</item>
+        <item>KSK Perbendaharaan</item>
+        <item>KSK Perbendaharaan</item>
+        <item>KSK Perencanaan Pengelolaan Ekosistem Gambut</item>
+        <item>KSK Perencanaan Program Dan Anggaran</item>
+        <item>KSK Publikasi dan Diseminasi Riset</item>
+        <item>KSK Rehabilitasi</item>
+        <item>KSK Restorasi</item>
+        <item>KSK Revitalisasi</item>
+        <item>KSK Riau</item>
+        <item>KSK Rumah Tangga Dan Pelayanan Pengadaan</item>
+        <item>KSK Sumatera Selatan</item>
+        <item>KSK Supervisi Pengelolaan Lahan Konsesi</item>
+        <item>KSK Tata Usaha dan Umum</item>
+        <item>KSK Teknis</item>
+        <item>Sekretaris Badan</item>
+    </string-array>
 </resources>

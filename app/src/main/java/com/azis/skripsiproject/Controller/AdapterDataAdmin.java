@@ -41,4 +41,5 @@ public class AdapterDataAdmin extends ArrayAdapter<DataItemAdmin> {
 
         return view;
     }
+
 }

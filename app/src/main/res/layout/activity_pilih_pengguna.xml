@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User.Dashboard.Pengajuan.PilihBarangActivity">
+    tools:context=".User.Dashboard.Pengajuan.PilihPenggunaActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,12 +32,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Data Barang"
+                    android:text="Pilih Barang"
                     android:textSize="20sp"
                     android:layout_below="@+id/back"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>
-
 
             </LinearLayout>
 

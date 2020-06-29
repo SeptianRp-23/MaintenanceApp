@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PilihBarangActivity extends AppCompatActivity {
+public class PilihPenggunaActivity extends AppCompatActivity {
 
     SessionManager sessionManager;
     String getId;
@@ -50,7 +49,7 @@ public class PilihBarangActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pilih_barang);
+        setContentView(R.layout.activity_pilih_pengguna);
 
         sessionManager = new SessionManager(this);
 
@@ -129,7 +128,7 @@ public class PilihBarangActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PilihBarangActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PilihPenggunaActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -176,6 +175,6 @@ public class PilihBarangActivity extends AppCompatActivity {
 //    }
 
     public void back(View view) {
-        startActivity(new Intent(PilihBarangActivity.this, DashboardActivity.class));
+        startActivity(new Intent(PilihPenggunaActivity.this, DashboardActivity.class));
     }
 }

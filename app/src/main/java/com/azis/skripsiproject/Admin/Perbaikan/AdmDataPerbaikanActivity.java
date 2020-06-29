@@ -2,7 +2,11 @@ package com.azis.skripsiproject.Admin.Perbaikan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -13,14 +17,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.azis.skripsiproject.Controller.AdapterDataAdmin;
-import com.azis.skripsiproject.Controller.DataItemAdmin;
+import com.azis.skripsiproject.Admin.Dashboard.AdmDashboardActivity;
 import com.azis.skripsiproject.Controller.Perbaikan.AdapterPengajuan;
 import com.azis.skripsiproject.Controller.Perbaikan.DataItemPengajuan;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Server.Api;
-import com.azis.skripsiproject.User.Dashboard.Pengajuan.PilihBarangActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +38,7 @@ public class AdmDataPerbaikanActivity extends AppCompatActivity {
     String getId;
     ListView myList;
     AdapterPengajuan adapterPengajuan;
+    ImageView btBack;
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
     private String ShowBarang = Api.URL_API + "getPengajuanAdm.php";
     DataItemPengajuan dataItemPengajuan;
@@ -52,8 +55,27 @@ public class AdmDataPerbaikanActivity extends AppCompatActivity {
         myList = findViewById(R.id.list);
         adapterPengajuan = new AdapterPengajuan(this, dataItemPengajuanArrayList);
         myList.setAdapter(adapterPengajuan);
+        btBack = findViewById(R.id.back);
+
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent intent = new Intent(AdmDataPerbaikanActivity.this, AdmDashboardActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+            }
+        });
 
         receiveData();
+
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                startActivity(new Intent(getApplicationContext(), AdmDetailPerbaikan.class)
+                        .putExtra("position", position));
+            }
+        });
 
     }
 
@@ -115,5 +137,12 @@ public class AdmDataPerbaikanActivity extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AdmDataPerbaikanActivity.this, AdmDashboardActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

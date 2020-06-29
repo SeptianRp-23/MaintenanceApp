@@ -67,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Id User"
+                    android:visibility="gone"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -76,15 +77,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nama"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="1dp" />
-
-                <EditText
-                    android:id="@+id/et_noBmn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="No Barang"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -104,6 +96,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tipe Barang"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+                <EditText
+                    android:id="@+id/et_noBmn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="No Barang"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -175,7 +176,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:id="@+id/linear2"
-                android:visibility="gone">
+                android:visibility="visible">
 
 
                 <ImageView
@@ -183,6 +184,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_camera"/>
 
                 <Button
@@ -195,19 +197,20 @@
 
 
                 <EditText
-                    android:id="@+id/et_uraian"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Uraian Kerusakan"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="1dp" />
-
-                <EditText
                     android:id="@+id/et_tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tanggal Pengajuan"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="1dp" />
+
+
+                <EditText
+                    android:id="@+id/et_uraian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Uraian Kerusakan"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -312,6 +315,13 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtRusak"
+                    android:visibility="gone"
+                    android:text="Rusak"/>
 
                 <Button
                     android:id="@+id/btn_kirim"

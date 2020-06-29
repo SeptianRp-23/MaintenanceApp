@@ -98,7 +98,7 @@
                         android:layout_below="@+id/img_barang"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:gravity="center"
                         android:textStyle="bold"/>
 
@@ -136,21 +136,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kelola Peminjaman"
+                        android:text="Kelola Barang Milik Negara"
                         android:layout_below="@+id/img_peminjaman"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:gravity="center"
                         android:id="@+id/c_tv_2"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:textStyle="bold"/>
-
 
                 </RelativeLayout>
 
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="150dp"
@@ -188,7 +188,6 @@
 
         </androidx.cardview.widget.CardView>
 
-
         <androidx.cardview.widget.CardView
             android:layout_width="150dp"
             android:layout_height="130dp"
@@ -225,7 +224,6 @@
 
         </androidx.cardview.widget.CardView>
 
-
     </GridLayout>
 
     <Button
@@ -238,6 +236,5 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/circle_primary"
         android:textColor="@android:color/white"/>
-
 
 </RelativeLayout>

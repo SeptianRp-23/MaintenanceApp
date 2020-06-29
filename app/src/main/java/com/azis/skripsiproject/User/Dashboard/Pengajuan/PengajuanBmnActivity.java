@@ -2,7 +2,6 @@ package com.azis.skripsiproject.User.Dashboard.Pengajuan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -23,19 +22,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.azis.skripsiproject.Admin.Perbaikan.AdmDataPerbaikanActivity;
+import com.azis.skripsiproject.Admin.Perbaikan.AdmDetailPerbaikan;
 import com.azis.skripsiproject.Controller.ApiInterface;
 import com.azis.skripsiproject.Controller.Data;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.R;
+import com.azis.skripsiproject.Server.Api;
 import com.azis.skripsiproject.Server.ApiClient;
 import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,11 +66,12 @@ public class PengajuanBmnActivity extends AppCompatActivity {
     EditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
     ImageView imgbawah1, imgatas1, imgbawah2, imgatas2, imgbawah3, imgatas3, imgfoto;
     Button btChose, btKirim;
+    TextView textRusak;
     LinearLayout lin1, lin2, lin3;
-
+    private String updateBarang = Api.URL_API + "updatePeminjaman.php";
+    String myFormat = "dd-MM-yyy hh:mm a";
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
     private Bitmap bitmap;
-//    private CircleImageView mPicture;
-//    private FloatingActionButton mFabChoosePic;
     ApiInterface apiInterface;
     SessionManager sessionManager;
     String getId, getNama;
@@ -81,6 +97,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
         btChose = findViewById(R.id.btn_chose);
         imgfoto = findViewById(R.id.img);
         btKirim = findViewById(R.id.btn_kirim);
+        textRusak = findViewById(R.id.txtRusak);
 
         sessionManager = new SessionManager(this);
 
@@ -199,11 +216,17 @@ public class PengajuanBmnActivity extends AppCompatActivity {
         //SetData
         Intent intent = getIntent();
         position = intent.getExtras().getInt("position");
-        etidBrg.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getNo_inventaris());
-        etjenis.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getJenis());
-        etTipe.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getTipe());
-        etPengguna.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getPengguna());
-        etPokja.setText(PilihBarangActivity.dataItemAdminArrayList.get(position).getPokja());
+        etidBrg.setText(PilihPenggunaActivity.dataItemAdminArrayList.get(position).getId());
+        etjenis.setText(PilihPenggunaActivity.dataItemAdminArrayList.get(position).getJenis());
+        etTipe.setText(PilihPenggunaActivity.dataItemAdminArrayList.get(position).getTipe());
+        etPengguna.setText(PilihPenggunaActivity.dataItemAdminArrayList.get(position).getPengguna());
+        etPokja.setText(PilihPenggunaActivity.dataItemAdminArrayList.get(position).getPokja());
+
+        //Set Tanggal
+        Calendar c1 = Calendar.getInstance();
+        String str1 = sdf.format(c1.getTime());
+        etTanggal.setText(str1);
+        etTanggal.setEnabled(false);
     }
 
     private void postData(final String key) {
@@ -251,6 +274,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
 
                 if (value.equals("1")) {
                     Toast.makeText(PengajuanBmnActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
+                    SaveEditDetail();
                     startActivity(new Intent(PengajuanBmnActivity.this, DashboardActivity.class));
                     finish();
                 } else {
@@ -277,10 +301,6 @@ public class PengajuanBmnActivity extends AppCompatActivity {
     }
 
     private void chooseFile() {
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
 
         ContentValues values = new ContentValues();
 //        values.put(MediaStore.Images.Media.TITLE, fileName);
@@ -353,5 +373,57 @@ public class PengajuanBmnActivity extends AppCompatActivity {
 
             }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void SaveEditDetail() {
+
+        final String status = this.textRusak.getText().toString().trim();
+        final String id = this.etidBrg.getText().toString().trim();
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, updateBarang,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if (success.equals("1")){
+//                                Toast.makeText(PengajuanBmnActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(PengajuanBmnActivity.this, AdmDataPerbaikanActivity.class));
+//                                sessionManager.createSession(email, name, id);
+                                System.out.println("Berhasil");
+                            }
+                        } catch (JSONException e) {
+                            System.out.println(e.toString());
+                            Toast.makeText(PengajuanBmnActivity.this, "Error Connection", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.toString());
+                        Toast.makeText(PengajuanBmnActivity.this, "Error Server", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("status", status);
+                params.put("id", id);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
     }
 }
