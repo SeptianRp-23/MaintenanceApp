@@ -9,6 +9,7 @@
     </string-array>
 
     <string-array name="data_pokja">
+        <item>Pilih Pokja</item>
         <item>DB Edukasi, Sosialisasi, Partisipasi, dan Kemitraan</item>
         <item>DB Konstruksi, Operasi, dan Pemeliharaan</item>
         <item>DB Penelitian Dan Pengembangan</item>

@@ -31,6 +31,7 @@ import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Server.ApiClient;
 import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -48,7 +49,7 @@ public class PengajuanFamumActivity extends AppCompatActivity {
     String myFormat = "dd-MM-yyy hh:mm a";
     Uri imageUri;
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-    EditText etIdUser, etNama, etidBrg, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
+    MaterialEditText etIdUser, etNama, etidBrg, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
     ImageView imgbawah1, imgatas1, imgbawah2, imgatas2, imgbawah3, imgatas3, imgfoto;
     Button btChose, btKirim;
     LinearLayout lin1, lin2, lin3;

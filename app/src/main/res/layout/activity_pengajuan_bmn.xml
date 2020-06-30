@@ -62,67 +62,80 @@
                 android:visibility="gone"
                 android:id="@+id/linear1">
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_idUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Id User"
+                    android:enabled="false"
                     android:visibility="gone"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Nama"
+                    android:enabled="false"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_jenis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Jenis"
+                    android:enabled="false"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_tipe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Tipe Barang"
+                    android:enabled="false"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_noBmn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="No Barang"
+                    android:enabled="false"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_pengguna"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Pengguna"
+                    android:enabled="false"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_pokja"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Pokja"
+                    android:enabled="false"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
@@ -191,34 +204,38 @@
                     android:id="@+id/btn_chose"
                     android:layout_width="100dp"
                     android:layout_height="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_gravity="center"
                     android:background="@drawable/circle_primary"
                     android:text="capture"/>
 
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Tanggal Pengajuan"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_uraian"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Uraian Kerusakan"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/et_kerusakan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Kerusakann"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -298,18 +315,20 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Nama Komponen Yang Diganti"
                     android:id="@+id/komponen"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
-                <EditText
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
                     android:hint="Perkiraan Biaya"
                     android:id="@+id/biaya"
                     android:layout_marginLeft="20dp"
@@ -343,7 +362,7 @@
 
     </ScrollView>
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Menunggu Konfirmasi"

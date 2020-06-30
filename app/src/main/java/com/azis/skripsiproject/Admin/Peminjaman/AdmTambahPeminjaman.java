@@ -121,7 +121,13 @@ public class AdmTambahPeminjaman extends AppCompatActivity {
             public void onClick(View view) {
 //                final String txtNama = etPeminjam.getText().toString();
 //                final String txtJabatan = etJabatan.getText().toString();
+                final String pokja = spJabatan.getSelectedItem().toString();
+                if (pokja.equals("Pilih Pokja")){
+                    Toast.makeText(AdmTambahPeminjaman.this, "Pilih Jabatan!", Toast.LENGTH_SHORT).show();
+                }
+                else{
                     InsertData();
+                }
 //                    SaveEditDetail();
             }
         });

@@ -40,6 +40,7 @@ import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Server.Api;
 import com.azis.skripsiproject.Server.ApiClient;
 import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,7 +61,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
     private static final int CAMERA_PIC_REQUEST = 7;
     Uri imageUri;
     int position;
-    EditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
+    MaterialEditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
     ImageView imgbawah1, imgatas1, imgbawah2, imgatas2, imgbawah3, imgatas3, imgfoto;
     Button btChose, btKirim;
     TextView textRusak;
