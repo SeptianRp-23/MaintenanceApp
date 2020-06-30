@@ -78,6 +78,20 @@
 
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Di Kembalikan"
+        android:id="@+id/txtKembali"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ready"
+        android:id="@+id/txtReady"
+        android:visibility="gone"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

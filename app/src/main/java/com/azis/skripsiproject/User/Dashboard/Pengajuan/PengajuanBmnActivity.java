@@ -58,10 +58,7 @@ import retrofit2.Response;
 public class PengajuanBmnActivity extends AppCompatActivity {
 
     private static final int CAMERA_PIC_REQUEST = 7;
-//    String myFormat = "dd-MM-yyy hh:mm a";
     Uri imageUri;
-//    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-//    private static final String TAG = "PengajuanBmnActivity";
     int position;
     EditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
     ImageView imgbawah1, imgatas1, imgbawah2, imgatas2, imgbawah3, imgatas3, imgfoto;

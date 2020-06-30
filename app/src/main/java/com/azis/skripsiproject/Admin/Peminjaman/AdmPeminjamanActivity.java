@@ -3,12 +3,17 @@ package com.azis.skripsiproject.Admin.Peminjaman;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -42,11 +47,14 @@ public class AdmPeminjamanActivity extends AppCompatActivity {
     SessionManager sessionManager;
     String getId;
     ListView myList;
+    TextView txtKembali, txtReady;
     CardView cardTambah;
     AdapterPeminjaman adapterPeminjaman;
     ImageView btBack;
     public static ArrayList<DataItemPeminjaman> dataItemPeminjamanArrayList = new ArrayList<>();
     private String ShowBarang = Api.URL_API + "getDataPeminjaman.php";
+    private String SetKembali = Api.URL_API + "updatePengembalian.php";
+    private String SetBarang = Api.URL_API + "updateBarangBMN.php";
     DataItemPeminjaman dataItemPeminjaman;
 
     @Override
@@ -58,11 +66,15 @@ public class AdmPeminjamanActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         getId = user.get(SessionManager.ID);
 
+        receiveData();
+
         myList = findViewById(R.id.list_peminjaman);
         adapterPeminjaman = new AdapterPeminjaman(this, dataItemPeminjamanArrayList);
         myList.setAdapter(adapterPeminjaman);
         btBack = findViewById(R.id.back);
         cardTambah = findViewById(R.id.card_add);
+        txtKembali = findViewById(R.id.txtKembali);
+        txtReady = findViewById(R.id.txtReady);
 
         cardTambah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,16 +92,112 @@ public class AdmPeminjamanActivity extends AppCompatActivity {
             }
         });
 
-        receiveData();
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-//        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-//
-//                startActivity(new Intent(getApplicationContext(), AdmDetailPerbaikan.class)
-//                        .putExtra("position", position));
-//            }
-//        });
+                final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                final ProgressDialog progressDialog = new ProgressDialog(view.getContext());
+                progressDialog.setMessage("Loading. . .");
+                final CharSequence[] dialogItem = {"Peminjaman Selesai"};
+                builder.setTitle(dataItemPeminjamanArrayList.get(position).getPenggunaPmjn());
+                builder.setItems(dialogItem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        switch (i) {
+                            case 0:
+                                final String id = dataItemPeminjamanArrayList.get(position).getIdPmjn();
+                                final String kembali = txtKembali.getText().toString().trim();
+
+                                progressDialog.show();
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST, SetKembali,
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                try {
+                                                    JSONObject jsonObject = new JSONObject(response);
+                                                    String success = jsonObject.getString("success");
+                                                    if (success.equals("1")){
+//                                                        Toast.makeText(AdmPeminjamanActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                                                        receiveData();
+                                                        StringRequest stringRequest = new StringRequest(Request.Method.POST, SetBarang,
+                                                                new Response.Listener<String>() {
+                                                                    @Override
+                                                                    public void onResponse(String response) {
+
+                                                                        try {
+                                                                            JSONObject jsonObject = new JSONObject(response);
+                                                                            String success = jsonObject.getString("success");
+
+                                                                            if (success.equals("1")){
+                                                                                progressDialog.dismiss();
+                                                                                Toast.makeText(AdmPeminjamanActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                                                                                receiveData();
+                                                                                Intent intent = new Intent(AdmPeminjamanActivity.this, AdmDashboardActivity.class);
+                                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                                                startActivity(intent);
+                                                                                System.out.println("Berhasil");
+                                                                            }
+                                                                        } catch (JSONException e) {
+                                                                            System.out.println(e.toString());
+                                                                            progressDialog.dismiss();
+                                                                            Toast.makeText(AdmPeminjamanActivity.this, "Error Connection", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    }
+                                                                },
+                                                                new Response.ErrorListener() {
+                                                                    @Override
+                                                                    public void onErrorResponse(VolleyError error) {
+                                                                        System.out.println(error.toString());
+                                                                        progressDialog.dismiss();
+                                                                        Toast.makeText(AdmPeminjamanActivity.this, "Error Server", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                })
+                                                        {
+                                                            @Override
+                                                            protected Map<String, String> getParams() throws AuthFailureError {
+                                                                Map<String, String> params = new HashMap<>();
+                                                                params.put("status", txtReady.getText().toString());
+                                                                params.put("no_inventaris", dataItemPeminjamanArrayList.get(position).getNo_inventarisPmjn());
+                                                                return params;
+                                                            }
+                                                        };
+                                                        RequestQueue requestQueue = Volley.newRequestQueue(AdmPeminjamanActivity.this);
+                                                        requestQueue.add(stringRequest);
+                                                    }
+                                                } catch (JSONException e) {
+                                                    System.out.println(e.toString());
+                                                    Toast.makeText(AdmPeminjamanActivity.this, "Error Connection", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                System.out.println(error.toString());
+                                                Toast.makeText(AdmPeminjamanActivity.this, "Error Server", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                {
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put("status", kembali);
+                                        params.put("id", id);
+                                        return params;
+                                    }
+                                };
+                                RequestQueue requestQueue = Volley.newRequestQueue(AdmPeminjamanActivity.this);
+                                requestQueue.add(stringRequest);
+                                receiveData();
+//                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                break;
+                        }
+                    }
+                });
+                builder.create().show();
+            }
+        });
 
     }
 

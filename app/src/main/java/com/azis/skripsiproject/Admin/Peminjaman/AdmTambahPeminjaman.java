@@ -127,21 +127,9 @@ public class AdmTambahPeminjaman extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(AdmTambahPeminjaman.this, AdmPeminjamanActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
     private void InsertData() {
-        final String txtInv = etNoInves.getText().toString().trim();
-        final String txtJenis = etJenis.getText().toString().trim();
-        final String txtTipe = etTipe.getText().toString().trim();
-        final String txtTanggal = etTanggal.getText().toString().trim();
-        final String txtNama = etPeminjam.getText().toString().trim();
-        final String txtPokja = etJabatan.getText().toString().trim();
-        final String txStatus = txtStatus.getText().toString().trim();
+        String txtNama = etPeminjam.getText().toString().trim();
+        String txtPokja = etJabatan.getText().toString().trim();
 
         final ProgressDialog progressDialog = new ProgressDialog(AdmTambahPeminjaman.this);
         progressDialog.setMessage("Loading . . .");
@@ -155,10 +143,11 @@ public class AdmTambahPeminjaman extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            if (response.equals("success")) {
-                                Toast.makeText(AdmTambahPeminjaman.this, "Success", Toast.LENGTH_SHORT).show();
+                            if (response.equalsIgnoreCase("success")) {
+                                Toast.makeText(AdmTambahPeminjaman.this, "Berhasil . . .", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
-                                Intent intent = new Intent(AdmTambahPeminjaman.this, AdmDashboardActivity.class);
+                                SaveEditDetail();
+                                Intent intent = new Intent(AdmTambahPeminjaman.this, AdmPeminjamanActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(AdmTambahPeminjaman.this, "Gagal", Toast.LENGTH_SHORT).show();
@@ -177,13 +166,13 @@ public class AdmTambahPeminjaman extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("no_inventaris", txtInv);
-                    params.put("jenis", txtJenis);
-                    params.put("tipe", txtTipe);
-                    params.put("tanggal", txtTanggal);
-                    params.put("pengguna", txtNama);
-                    params.put("pokja", txtPokja);
-                    params.put("status", txStatus);
+                    params.put("no_inventaris", etNoInves.getText().toString());
+                    params.put("jenis", etJenis.getText().toString());
+                    params.put("tipe", etTipe.getText().toString());
+                    params.put("tanggal", etTanggal.getText().toString());
+                    params.put("pengguna", etPeminjam.getText().toString());
+                    params.put("pokja", etJabatan.getText().toString());
+                    params.put("status", txtStatus.getText().toString());
                     return params;
                 }
             };
@@ -242,5 +231,13 @@ public class AdmTambahPeminjaman extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AdmTambahPeminjaman.this, AdmPeminjamanActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
