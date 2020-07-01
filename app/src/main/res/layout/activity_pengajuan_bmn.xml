@@ -67,7 +67,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Id User"
-                    android:enabled="false"
                     android:visibility="gone"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -189,7 +188,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:id="@+id/linear2"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <ImageView
@@ -201,10 +200,10 @@
                     android:src="@drawable/ic_camera"/>
 
                 <Button
-                    android:id="@+id/btn_chose"
+                    android:id="@+id/btn_chosee"
                     android:layout_width="100dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:background="@drawable/circle_primary"
                     android:text="capture"/>

@@ -92,7 +92,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
         etkomponen = findViewById(R.id.komponen);
         etbiaya = findViewById(R.id.biaya);
         etStatus = findViewById(R.id.status);
-        btChose = findViewById(R.id.btn_chose);
+        btChose = findViewById(R.id.btn_chosee);
         imgfoto = findViewById(R.id.img);
         btKirim = findViewById(R.id.btn_kirim);
         textRusak = findViewById(R.id.txtRusak);
