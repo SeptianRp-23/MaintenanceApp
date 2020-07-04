@@ -8,20 +8,20 @@
     android:orientation="vertical"
     tools:context=".User.Dashboard.User.ProfileActivity">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/colorPrimary"-->
-<!--        android:id="@+id/toolbar">-->
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar">
 
-<!--        <ImageView-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:src="@drawable/ic_left"-->
-<!--            android:foreground="?attr/selectableItemBackgroundBorderless"-->
-<!--            android:onClick="back" />-->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_left"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:onClick="back" />
 
-<!--    </androidx.appcompat.widget.Toolbar>-->
+    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -182,5 +182,18 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_primary"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="140dp"
+        android:layout_marginTop="20dp"
+        android:text="Logout"
+        android:textColor="@android:color/white"
+        android:id="@+id/btn_logout"
+        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>
