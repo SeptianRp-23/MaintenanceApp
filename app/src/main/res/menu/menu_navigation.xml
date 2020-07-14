@@ -10,8 +10,8 @@
         android:title="Proses"
         android:icon="@drawable/ic_history"/>
     <item
-        android:id="@+id/laporan"
-        android:title="Laporan"
-        android:icon="@drawable/ic_report"/>
+        android:id="@+id/account"
+        android:title="Profle"
+        android:icon="@drawable/ic_account"/>
 
 </menu>

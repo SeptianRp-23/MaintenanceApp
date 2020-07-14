@@ -136,7 +136,7 @@ public class DashboardActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
 
-                    case R.id.laporan:
+                    case R.id. account:
                         startActivity(new Intent(getApplicationContext(),
                                 LaporanActivity.class));
                         overridePendingTransition(0,0);

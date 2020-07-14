@@ -46,7 +46,7 @@ public class LaporanActivity extends AppCompatActivity {
 
         //ButtomNav
         BottomNavigationView bottomNavigationView = findViewById(R.id.buttom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.laporan);
+        bottomNavigationView.setSelectedItemId(R.id.account);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -63,7 +63,7 @@ public class LaporanActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
 
-                    case R.id.laporan:
+                    case R.id.account:
 //                        startActivity(new Intent(getApplicationContext(),
 //                                LaporanActivity.class));
 //                        overridePendingTransition(0,0);
