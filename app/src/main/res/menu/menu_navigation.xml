@@ -3,15 +3,15 @@
 
     <item
         android:id="@+id/dashboard"
-        android:title="Dashboard"
+        android:title="Utama"
         android:icon="@drawable/ic_dashboard"/>
     <item
         android:id="@+id/status"
         android:title="Proses"
-        android:icon="@drawable/ic_history"/>
+        android:icon="@drawable/ic_progress"/>
     <item
         android:id="@+id/account"
-        android:title="Profle"
+        android:title="Profil"
         android:icon="@drawable/ic_account"/>
 
 </menu>

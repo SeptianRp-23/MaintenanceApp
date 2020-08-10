@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.Perbaikan.AdmDetailPerbaikan">
+    tools:context=".Admin.Perbaikan.AdmDetailPerbaikanBmn">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data Perbaikan"
+                android:text="Detail Pengajuan"
                 android:layout_marginLeft="5dp"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
@@ -78,6 +78,26 @@
                         app:met_floatingLabel="normal"
                         android:hint="Nama Pemohon"
                         android:id="@+id/nama_pemohon"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Nama Pengguna"
+                        android:id="@+id/nama_pengguna"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Pokja"
+                        android:id="@+id/pokja"
                         android:layout_marginLeft="10dp"
                         android:enabled="false"
                         android:layout_marginRight="10dp"/>
@@ -153,6 +173,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_below="@+id/btn_show"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/gambar"/>
 
@@ -178,24 +199,26 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/gambar"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:layout_marginTop="20dp"
+                android:id="@+id/linbt"
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:layout_width="120dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@android:color/holo_red_dark"
                     android:id="@+id/btn_tolak"
-                    android:text="Tolak"
+                    android:text="Not Approved"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>
 
                 <Button
-                    android:layout_width="120dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:id="@+id/btn_terima"
-                    android:text="Setujui"
+                    android:text="Approved"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>
 

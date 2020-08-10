@@ -7,7 +7,7 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
     @FormUrlEncoded
-    @POST("insertPerbaikan.php")
+    @POST("insertPerbaikanBmn.php")
     Call<Data> insertData(
             @Field("key") String key,
             @Field("id_user") String idUser,

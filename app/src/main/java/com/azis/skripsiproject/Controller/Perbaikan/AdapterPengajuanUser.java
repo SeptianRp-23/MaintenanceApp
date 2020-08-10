@@ -35,16 +35,16 @@ public class AdapterPengajuanUser extends ArrayAdapter<DataItemPengajuan> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_show_pengajuan, null, true);
 
         TextView tvId = view.findViewById(R.id.txt_pengajuan);
-        TextView tvNama = view.findViewById(R.id.txt_nama_pengguna);
-        TextView tvStatus = view.findViewById(R.id.txt_status);
-        TextView tvJenis = view.findViewById(R.id.txt_jenis);
-        TextView tvTipe = view.findViewById(R.id.txt_tipe);
+        TextView tvJenis = view.findViewById(R.id.csp_jenis);
+        TextView tvTipe = view.findViewById(R.id.csp_tipe);
+        TextView tvStatus = view.findViewById(R.id.csp_status);
+        TextView tvTgl = view.findViewById(R.id.csp_tanggal);
 
         tvId.setText(arrayListDataPengajuan.get(position).getId());
-        tvNama.setText(arrayListDataPengajuan.get(position).getNama());
-        tvStatus.setText(arrayListDataPengajuan.get(position).getStatus());
         tvJenis.setText(arrayListDataPengajuan.get(position).getJenis());
         tvTipe.setText(arrayListDataPengajuan.get(position).getTipe());
+        tvStatus.setText(arrayListDataPengajuan.get(position).getStatus());
+        tvTgl.setText(arrayListDataPengajuan.get(position).getTanggal());
 
         final String txtStatus = tvStatus.getText().toString().trim();
         if (txtStatus.equals("Di Tolak")){

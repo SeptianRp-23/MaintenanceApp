@@ -3,6 +3,7 @@ package com.azis.skripsiproject.User.Proses;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -20,13 +21,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.azis.skripsiproject.Controller.Perbaikan.AdapterPengajuanProses;
 import com.azis.skripsiproject.Controller.Perbaikan.AdapterPengajuanUser;
 import com.azis.skripsiproject.Controller.Perbaikan.DataItemPengajuan;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Server.Api;
 import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
+import com.azis.skripsiproject.User.Dashboard.User.ProfileActivity;
 import com.azis.skripsiproject.User.Laporan.LaporanActivity;
+import com.azis.skripsiproject.User.Proses.DetailsPengajuan.ProsesLaporSelesai;
 import com.azis.skripsiproject.User.Proses.DetailsPengajuan.ProsesStatusDetail;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -47,7 +51,7 @@ public class ProsesStatusActivity extends AppCompatActivity {
     ListView myList;
     TextView setid, txtKosong;
 //    Handler mHandler;
-    AdapterPengajuanUser adapterPengajuanUser;
+    AdapterPengajuanProses adapterPengajuanUser;
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
     private String getPerbaikan = Api.URL_API + "getPengajuanProses.php";
     DataItemPengajuan dataItemPengajuan;
@@ -73,7 +77,7 @@ public class ProsesStatusActivity extends AppCompatActivity {
         });
 
         myList = findViewById(R.id.list);
-        adapterPengajuanUser = new AdapterPengajuanUser(this, dataItemPengajuanArrayList);
+        adapterPengajuanUser = new AdapterPengajuanProses(this, dataItemPengajuanArrayList);
         myList.setAdapter(adapterPengajuanUser);
 
 
@@ -85,12 +89,12 @@ public class ProsesStatusActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                startActivity(new Intent(getApplicationContext(), ProsesStatusDetail.class)
+                startActivity(new Intent(getApplicationContext(), ProsesLaporSelesai.class)
                         .putExtra("position", position));
             }
         });
 
-//        receiveData();
+        receiveData();
 
         //ButtomNav
         BottomNavigationView bottomNavigationView = findViewById(R.id.buttom_navigation);
@@ -113,7 +117,7 @@ public class ProsesStatusActivity extends AppCompatActivity {
 
                     case R.id.account:
                         startActivity(new Intent(getApplicationContext(),
-                                LaporanActivity.class));
+                                ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -131,12 +135,17 @@ public class ProsesStatusActivity extends AppCompatActivity {
 //    };
 
     private void receiveData(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sedang Memuat Data . . .");
+//        loading.setVisibility(View.VISIBLE);
+        progressDialog.show();
         final String etId = setid.getText().toString().trim();
         StringRequest request = new StringRequest(Request.Method.POST, getPerbaikan,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dataItemPengajuanArrayList.clear();
+                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String sucess = jsonObject.getString("success");
@@ -161,7 +170,7 @@ public class ProsesStatusActivity extends AppCompatActivity {
                                     String biaya = object.getString("biaya");
                                     String gambar = object.getString("gambar");
                                     String status = object.getString("status");
-
+                                    progressDialog.dismiss();
                                     txtKosong.setVisibility(View.GONE);
                                     dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
                                     dataItemPengajuanArrayList.add(dataItemPengajuan);
@@ -172,12 +181,14 @@ public class ProsesStatusActivity extends AppCompatActivity {
                         }
                         catch (JSONException e){
                             e.toString();
+                            progressDialog.dismiss();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
                         Toast.makeText(ProsesStatusActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -204,12 +215,8 @@ public class ProsesStatusActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            finishAffinity();
             finish();
-            System.exit(0);
         } else {
             backToast = Toast.makeText(this, "Tekan Lagi Untuk Keluar", Toast.LENGTH_SHORT);
             backToast.show();

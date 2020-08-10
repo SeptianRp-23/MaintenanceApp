@@ -9,6 +9,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -22,10 +23,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.azis.skripsiproject.Controller.ApiInterface;
+import com.azis.skripsiproject.Controller.ApiInterface2;
 import com.azis.skripsiproject.Controller.Data;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.R;
@@ -46,19 +49,24 @@ import retrofit2.Response;
 public class PengajuanFamumActivity extends AppCompatActivity {
 
     private static final int CAMERA_PIC_REQUEST = 7;
-    String myFormat = "dd-MM-yyy hh:mm a";
+    String myFormat = "EEEE, dd MMMM yyyy";
     Uri imageUri;
-    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-    MaterialEditText etIdUser, etNama, etidBrg, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+    MaterialEditText etIdUser, etNama, etidBrg, etTipe, etPengguna, etPokja, etUraian, etTanggal, etkomponen, etbiaya;
+    EditText etStatus;
     ImageView imgbawah1, imgatas1, imgbawah2, imgatas2, imgbawah3, imgatas3, imgfoto;
     Button btChose, btKirim;
     LinearLayout lin1, lin2, lin3;
     Spinner List;
+    private RadioGroup opsi;
+    String rgSelect="";
 
     private Bitmap bitmap;
-    ApiInterface apiInterface;
+    ApiInterface2 apiInterface2;
     SessionManager sessionManager;
     String getId, getNama;
+    private Toast backToast;
+    private long backPressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,6 @@ public class PengajuanFamumActivity extends AppCompatActivity {
         etTipe = findViewById(R.id.et_tipe);
         etPengguna = findViewById(R.id.et_pengguna);
         etPokja = findViewById(R.id.et_pokja);
-        etKerusakan = findViewById(R.id.et_kerusakan);
         etUraian = findViewById(R.id.et_uraian);
         etTanggal = findViewById(R.id.et_tanggal);
         etkomponen = findViewById(R.id.komponen);
@@ -81,6 +88,23 @@ public class PengajuanFamumActivity extends AppCompatActivity {
         imgfoto = findViewById(R.id.img);
         btKirim = findViewById(R.id.btn_kirim);
         List = findViewById(R.id.listItem);
+        opsi = findViewById(R.id.rg1);
+
+        opsi.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int id) {
+                switch (id){
+                    case R.id.rb_rusak_ringan:
+                        rgSelect = "Rusak Ringan";
+                        Toast.makeText(PengajuanFamumActivity.this, ""+rgSelect, Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.rb_rusak_berat:
+                        rgSelect = "Rusak Berat";
+                        Toast.makeText(PengajuanFamumActivity.this, ""+rgSelect, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
 
         sessionManager = new SessionManager(this);
 
@@ -183,7 +207,6 @@ public class PengajuanFamumActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(etbiaya.getText().toString()) ||
                         TextUtils.isEmpty(etidBrg.getText().toString()) ||
                         TextUtils.isEmpty(etIdUser.getText().toString()) ||
-                        TextUtils.isEmpty(etKerusakan.getText().toString()) ||
                         TextUtils.isEmpty(etkomponen.getText().toString()) ||
                         TextUtils.isEmpty(etPengguna.getText().toString()) ||
                         TextUtils.isEmpty(etPokja.getText().toString()) ||
@@ -220,7 +243,7 @@ public class PengajuanFamumActivity extends AppCompatActivity {
         String tipe = etTipe.getText().toString().trim();
         String pengguna = etPengguna.getText().toString().trim();
         String pokja = etPokja.getText().toString().trim();
-        String kerusakan = etKerusakan.getText().toString().trim();
+        String kerusakan = rgSelect;
         String uraian = etUraian.getText().toString().trim();
         String tanggal = etTanggal.getText().toString().trim();
         String keterangan = etkomponen.getText().toString().trim();
@@ -233,9 +256,9 @@ public class PengajuanFamumActivity extends AppCompatActivity {
             gambar = getStringImage(bitmap);
         }
 
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterface2 = ApiClient.getApiClient().create(ApiInterface2.class);
 
-        Call<Data> call = apiInterface.insertData(key, idUser, namaUser, idBrg, jenis, tipe, pengguna, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
+        Call<Data> call = apiInterface2.insertData(key, idUser, namaUser, idBrg, jenis, tipe, pengguna, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
 
         call.enqueue(new Callback<Data>() {
             @Override
@@ -353,4 +376,5 @@ public class PengajuanFamumActivity extends AppCompatActivity {
             }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }

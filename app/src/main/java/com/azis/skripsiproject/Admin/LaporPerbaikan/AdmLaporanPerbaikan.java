@@ -1,13 +1,15 @@
-package com.azis.skripsiproject.Admin.Perbaikan;
+package com.azis.skripsiproject.Admin.LaporPerbaikan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -18,7 +20,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.azis.skripsiproject.Admin.Dashboard.AdmDashboardActivity;
-import com.azis.skripsiproject.Controller.Perbaikan.AdapterPengajuan;
+import com.azis.skripsiproject.Admin.Perbaikan.AdmDetailPerbaikanBmn;
+import com.azis.skripsiproject.Admin.Perbaikan.AdmPerbaikanBmnActivity;
+import com.azis.skripsiproject.Admin.Perbaikan.AdmPerbaikanFamum;
+import com.azis.skripsiproject.Controller.Perbaikan.AdapterPengajuanProses;
 import com.azis.skripsiproject.Controller.Perbaikan.DataItemPengajuan;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.R;
@@ -32,39 +37,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdmDataPerbaikanActivity extends AppCompatActivity {
+public class AdmLaporanPerbaikan extends AppCompatActivity {
 
     SessionManager sessionManager;
     String getId;
     ListView myList;
-    AdapterPengajuan adapterPengajuan;
-    ImageView btBack;
+    AdapterLaporan adapterPengajuanProses;
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
-    private String ShowBarang = Api.URL_API + "getPengajuanAdm.php";
+    private String ShowBarang = Api.URL_API + "getPengajuanSelesai.php";
     DataItemPengajuan dataItemPengajuan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adm_data_perbaikan);
+        setContentView(R.layout.activity_adm_laporan_perbaikan);
 
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         getId = user.get(SessionManager.ID);
 
         myList = findViewById(R.id.list);
-        adapterPengajuan = new AdapterPengajuan(this, dataItemPengajuanArrayList);
-        myList.setAdapter(adapterPengajuan);
-        btBack = findViewById(R.id.back);
-
-        btBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                    Intent intent = new Intent(AdmDataPerbaikanActivity.this, AdmDashboardActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-            }
-        });
+        adapterPengajuanProses = new AdapterLaporan(this, dataItemPengajuanArrayList);
+        myList.setAdapter(adapterPengajuanProses);
 
         receiveData();
 
@@ -72,19 +66,23 @@ public class AdmDataPerbaikanActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                startActivity(new Intent(getApplicationContext(), AdmDetailPerbaikan.class)
+                startActivity(new Intent(getApplicationContext(), AdmLaporanSelesaiDetail.class)
                         .putExtra("position", position));
             }
         });
-
     }
 
     public void receiveData(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sedang Memuat Data . . .");
+//        loading.setVisibility(View.VISIBLE);
+        progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, ShowBarang,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dataItemPengajuanArrayList.clear();
+                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String sucess = jsonObject.getString("success");
@@ -110,21 +108,24 @@ public class AdmDataPerbaikanActivity extends AppCompatActivity {
                                     String gambar = object.getString("gambar");
                                     String status = object.getString("status");
 
+                                    progressDialog.dismiss();
                                     dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
                                     dataItemPengajuanArrayList.add(dataItemPengajuan);
-                                    adapterPengajuan.notifyDataSetChanged();
+                                    adapterPengajuanProses.notifyDataSetChanged();
                                 }
                             }
                         }
                         catch (JSONException e){
-                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(AdmLaporanPerbaikan.this, ""+e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(AdmDataPerbaikanActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        Toast.makeText(AdmLaporanPerbaikan.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -141,7 +142,7 @@ public class AdmDataPerbaikanActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AdmDataPerbaikanActivity.this, AdmDashboardActivity.class);
+        Intent intent = new Intent(AdmLaporanPerbaikan.this, AdmDashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

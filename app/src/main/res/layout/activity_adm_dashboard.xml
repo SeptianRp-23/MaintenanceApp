@@ -22,8 +22,17 @@
             android:layout_marginLeft="20sp"
             android:layout_centerVertical="true"
             android:textColor="@android:color/white"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_profile"
+            android:id="@+id/profile"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
 
     </RelativeLayout>
 
@@ -88,7 +97,7 @@
                         android:layout_height="60dp"
                         android:layout_centerHorizontal="true"
                         android:id="@+id/img_barang"
-                        android:src="@drawable/ic_barang"/>
+                        android:src="@drawable/ic_monitoring"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -98,7 +107,7 @@
                         android:layout_below="@+id/img_barang"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:gravity="center"
                         android:textStyle="bold"/>
 
@@ -114,39 +123,33 @@
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
             android:layout_margin="10dp"
-            android:id="@+id/card_peminjaman">
+            android:id="@+id/card_perbaikan_famum">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
+                android:layout_height="match_parent"
+                android:gravity="center">
 
                     <ImageView
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_peminjaman"
-                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_datemaintenance"
+                        android:layout_centerInParent="true"
                         android:id="@+id/img_peminjaman"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kelola Barang Milik Negara"
+                        android:text="Laporan Perbaikan"
                         android:layout_below="@+id/img_peminjaman"
-                        android:textSize="16sp"
-                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:layout_centerHorizontal="true"
                         android:id="@+id/c_tv_2"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:textStyle="bold"/>
-
-                </RelativeLayout>
 
             </RelativeLayout>
 
@@ -159,7 +162,7 @@
             app:cardCornerRadius="8dp"
             android:layout_marginTop="20dp"
             android:layout_margin="10dp"
-            android:id="@+id/card_admin">
+            android:id="@+id/card_peminjaman">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -169,18 +172,19 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/ic_admin"
+                    android:src="@drawable/ic_peminjaman"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/img_admin"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profile Admin"
+                    android:text="Penggunaan Barang Milik Negara"
                     android:layout_marginTop="5dp"
                     android:layout_below="@+id/img_admin"
                     android:layout_centerHorizontal="true"
-                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
                     android:id="@+id/c_tv_3"
                     android:textStyle="bold"/>
 

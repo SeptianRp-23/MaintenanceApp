@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Server.Api;
+import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
 import com.azis.skripsiproject.User.Proses.ProsesStatusActivity;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -35,7 +36,7 @@ import java.util.Map;
 public class ProsesStatusDetail extends AppCompatActivity {
 
     private static final String TAG = ProsesStatusDetail.class.getSimpleName() ;
-    MaterialEditText etIdPengajuan, etTanggal, etIdBarang, etJenis, etTipe, etNamaPengguna, etDivisi;
+    MaterialEditText etIdPengajuan, etTanggal, etJenis, etTipe, etjenisKerusakan, etdetailKerusakan;
     TextView tvKeterangan, tvProses;
     LinearLayout tvDiTolak;
     Button btProses, btAjukan;
@@ -61,11 +62,10 @@ public class ProsesStatusDetail extends AppCompatActivity {
 
         etIdPengajuan = findViewById(R.id.et_id);
         etTanggal = findViewById(R.id.et_tanggal_pengajuan);
-        etIdBarang = findViewById(R.id.et_id_barang);
         etJenis = findViewById(R.id.et_jenis_brg);
         etTipe = findViewById(R.id.et_tipe_brg);
-        etNamaPengguna = findViewById(R.id.et_nama_pengguna);
-        etDivisi = findViewById(R.id.et_divisi);
+        etjenisKerusakan = findViewById(R.id.et_kerusakan);
+        etdetailKerusakan = findViewById(R.id.et_detail_keterangan);
         tvKeterangan = findViewById(R.id.txt_ket_pengajuan);
         tvDiTolak = findViewById(R.id.txt_ditolak);
         btProses = findViewById(R.id.btn_proses);
@@ -91,21 +91,20 @@ public class ProsesStatusDetail extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProsesStatusDetail.this, ProsesStatusActivity.class));
+                startActivity(new Intent(ProsesStatusDetail.this, DashboardActivity.class));
             }
         });
 
         //SetData
         Intent intent = getIntent();
         position = intent.getExtras().getInt("position");
-        etIdPengajuan.setText(ProsesStatusActivity.dataItemPengajuanArrayList.get(position).getId());
-        etTanggal.setText(ProsesStatusActivity.dataItemPengajuanArrayList.get(position).getTanggal());
-        etIdBarang.setText(ProsesStatusActivity.dataItemPengajuanArrayList.get(position).getId_barang());
-        etJenis.setText(ProsesStatusActivity.dataItemPengajuanArrayList.get(position).getJenis());
-        etTipe.setText(ProsesStatusActivity.dataItemPengajuanArrayList.get(position).getTipe());
-        etNamaPengguna.setText(ProsesStatusActivity.dataItemPengajuanArrayList.get(position).getNama());
-        etDivisi.setText(ProsesStatusActivity.dataItemPengajuanArrayList.get(position).getPokja());
-        tvKeterangan.setText(ProsesStatusActivity.dataItemPengajuanArrayList.get(position).getStatus());
+        etIdPengajuan.setText(DashboardActivity.dataItemPengajuanArrayList.get(position).getId());
+        etTanggal.setText(DashboardActivity.dataItemPengajuanArrayList.get(position).getTanggal());
+        etJenis.setText(DashboardActivity.dataItemPengajuanArrayList.get(position).getJenis());
+        etTipe.setText(DashboardActivity.dataItemPengajuanArrayList.get(position).getTipe());
+        etjenisKerusakan.setText(DashboardActivity.dataItemPengajuanArrayList.get(position).getKerusakan());
+        etdetailKerusakan.setText(DashboardActivity.dataItemPengajuanArrayList.get(position).getUraian());
+        tvKeterangan.setText(DashboardActivity.dataItemPengajuanArrayList.get(position).getStatus());
 
         btProses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,12 +179,6 @@ public class ProsesStatusDetail extends AppCompatActivity {
     }
 
     private void SaveEditDetail() {
-
-//        final String merk = this.etMerk.getText().toString().trim();
-//        final String nama = this.etNama.getText().toString().trim();
-//        final String warna = this.etWarna.getText().toString().trim();
-//        final String plat = this.etPlat.getText().toString().trim();
-//        final String tahun = this.etTahun.getText().toString().trim();
         final String status = this.tvProses.getText().toString().trim();
         final String id = this.etIdPengajuan.getText().toString().trim();
 
@@ -205,7 +198,7 @@ public class ProsesStatusDetail extends AppCompatActivity {
 
                             if (success.equals("1")){
                                 Toast.makeText(ProsesStatusDetail.this, "Success!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ProsesStatusDetail.this, ProsesStatusActivity.class));
+                                startActivity(new Intent(ProsesStatusDetail.this, DashboardActivity.class));
 //                                sessionManager.createSession(email, name, id);
                                 System.out.println("Berhasil");
                             }
@@ -242,7 +235,7 @@ public class ProsesStatusDetail extends AppCompatActivity {
                     public void onResponse(String response) {
                         if (response.equalsIgnoreCase("sucess")){
                             Toast.makeText(ProsesStatusDetail.this, "Sucess!", Toast.LENGTH_SHORT).show();                                startActivity(new Intent(ProsesStatusDetail.this, ProsesStatusActivity.class));
-                            startActivity(new Intent(ProsesStatusDetail.this, ProsesStatusActivity.class));
+                            startActivity(new Intent(ProsesStatusDetail.this, DashboardActivity.class));
                         }
                         else {
                             Toast.makeText(ProsesStatusDetail.this, "Error!", Toast.LENGTH_SHORT).show();

@@ -33,7 +33,7 @@
                 android:text="Laporan Selesai"
                 android:layout_marginLeft="5dp"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"/>
 
         </LinearLayout>

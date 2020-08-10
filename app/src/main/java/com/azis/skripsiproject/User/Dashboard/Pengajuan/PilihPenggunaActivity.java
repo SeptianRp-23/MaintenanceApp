@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -44,6 +45,8 @@ public class PilihPenggunaActivity extends AppCompatActivity {
     private String ShowBarang = Api.URL_API + "showBarang.php";
     DataItemAdmin dataItemAdmin;
     MaterialEditText cari;
+    private Toast backToast;
+    private long backPressedTime;
 
 
     @Override
@@ -176,5 +179,11 @@ public class PilihPenggunaActivity extends AppCompatActivity {
 
     public void back(View view) {
         startActivity(new Intent(PilihPenggunaActivity.this, DashboardActivity.class));
+        finishAffinity();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

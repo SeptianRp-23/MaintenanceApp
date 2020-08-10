@@ -18,14 +18,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Admin.Peminjaman.PilihBarangActivity"
-            android:theme="@style/Custom"></activity>
-        <activity android:name=".Admin.Laporan.AdmLaporanSelesai" />
+        <activity android:name=".Admin.Laporan.PdfViewerActivity"></activity>
+        <activity android:name=".Admin.Laporan.PDFActivity" />
         <activity
-            android:name=".Admin.Perbaikan.AdmDetailPerbaikan"
+            android:name=".Admin.LaporPerbaikan.AdmLaporanSelesaiDetail"
             android:theme="@style/Custom" />
         <activity
-            android:name=".Admin.Perbaikan.AdmDataPerbaikanActivity"
+            android:name=".User.Proses.DetailsPengajuan.ProsesLaporSelesai"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Perbaikan.AdmDetailPerbaikanFamum"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.LaporPerbaikan.AdmLaporanPerbaikan"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Perbaikan.AdmPerbaikanFamum"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Peminjaman.PilihBarangActivity"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Perbaikan.AdmDetailPerbaikanBmn"
+            android:theme="@style/Custom" />
+        <activity
+            android:name=".Admin.Perbaikan.AdmPerbaikanBmnActivity"
             android:theme="@style/Custom" />
         <activity
             android:name=".Admin.Peminjaman.AdmTambahPeminjaman"

@@ -9,6 +9,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,9 +20,9 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +32,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.azis.skripsiproject.Admin.Perbaikan.AdmDataPerbaikanActivity;
-import com.azis.skripsiproject.Admin.Perbaikan.AdmDetailPerbaikan;
 import com.azis.skripsiproject.Controller.ApiInterface;
 import com.azis.skripsiproject.Controller.Data;
 import com.azis.skripsiproject.Controller.SessionManager;
@@ -61,18 +60,22 @@ public class PengajuanBmnActivity extends AppCompatActivity {
     private static final int CAMERA_PIC_REQUEST = 7;
     Uri imageUri;
     int position;
-    MaterialEditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etKerusakan, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
+    MaterialEditText etIdUser, etNama, etidBrg, etjenis, etTipe, etPengguna, etPokja, etUraian, etTanggal, etkomponen, etbiaya, etStatus;
     ImageView imgbawah1, imgatas1, imgbawah2, imgatas2, imgbawah3, imgatas3, imgfoto;
     Button btChose, btKirim;
     TextView textRusak;
     LinearLayout lin1, lin2, lin3;
     private String updateBarang = Api.URL_API + "updatePeminjaman.php";
-    String myFormat = "dd-MM-yyy hh:mm a";
-    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+    String myFormat = "EEEE, dd MMMM yyyy";
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
     private Bitmap bitmap;
     ApiInterface apiInterface;
     SessionManager sessionManager;
     String getId, getNama;
+    private RadioGroup opsi;
+    String rgSelect="";
+    private Toast backToast;
+    private long backPressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,6 @@ public class PengajuanBmnActivity extends AppCompatActivity {
         etTipe = findViewById(R.id.et_tipe);
         etPengguna = findViewById(R.id.et_pengguna);
         etPokja = findViewById(R.id.et_pokja);
-        etKerusakan = findViewById(R.id.et_kerusakan);
         etUraian = findViewById(R.id.et_uraian);
         etTanggal = findViewById(R.id.et_tanggal);
         etkomponen = findViewById(R.id.komponen);
@@ -96,6 +98,23 @@ public class PengajuanBmnActivity extends AppCompatActivity {
         imgfoto = findViewById(R.id.img);
         btKirim = findViewById(R.id.btn_kirim);
         textRusak = findViewById(R.id.txtRusak);
+        opsi = findViewById(R.id.rg1);
+
+        opsi.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int id) {
+                switch (id){
+                    case R.id.rb_rusak_ringan:
+                        rgSelect = "Rusak Ringan";
+                        Toast.makeText(PengajuanBmnActivity.this, ""+rgSelect, Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.rb_rusak_berat:
+                        rgSelect = "Rusak Berat";
+                        Toast.makeText(PengajuanBmnActivity.this, ""+rgSelect, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
 
         sessionManager = new SessionManager(this);
 
@@ -189,7 +208,6 @@ public class PengajuanBmnActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(etbiaya.getText().toString()) ||
                         TextUtils.isEmpty(etidBrg.getText().toString()) ||
                         TextUtils.isEmpty(etIdUser.getText().toString()) ||
-                        TextUtils.isEmpty(etKerusakan.getText().toString()) ||
                         TextUtils.isEmpty(etkomponen.getText().toString()) ||
                         TextUtils.isEmpty(etPengguna.getText().toString()) ||
                         TextUtils.isEmpty(etPokja.getText().toString()) ||
@@ -242,7 +260,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
         String tipe = etTipe.getText().toString().trim();
         String pengguna = etPengguna.getText().toString().trim();
         String pokja = etPokja.getText().toString().trim();
-        String kerusakan = etKerusakan.getText().toString().trim();
+        String kerusakan = rgSelect;
         String uraian = etUraian.getText().toString().trim();
         String tanggal = etTanggal.getText().toString().trim();
         String keterangan = etkomponen.getText().toString().trim();

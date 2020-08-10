@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.Perbaikan.AdmDetailPerbaikanFamum">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_left"
+                android:id="@+id/fam_back"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detail Pengajuan"
+                android:layout_marginLeft="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp"
+                android:id="@+id/card_dtl_1"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="No Pengajuan"
+                        android:id="@+id/fam_no_pengajuan"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Nama Pemohon"
+                        android:id="@+id/fam_nama_pemohon"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Jenis Fasilitas"
+                        android:id="@+id/fam_jenis_fasilitas"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Perbaikan"
+                        android:id="@+id/fam_item_perbaikan"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Tanggal"
+                        android:id="@+id/fam_tgl_pengajuan"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Estimasi Harga"
+                        android:id="@+id/fam_estimasi_harga"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Gambar"
+                        android:id="@+id/fam_no_gambar"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/card_dtl_1"
+                android:id="@+id/fam_btn_lihat"
+                android:text="Lihat Gambar"
+                android:textColor="@android:color/white"
+                android:background="@drawable/circle_primary"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/fam_btn_lihat"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/fam_gambar"/>
+
+            <ProgressBar
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_show"
+                android:layout_marginTop="20sp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/fam_progress"
+                android:backgroundTint="@color/colorPrimary"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/fam_txt_keterangan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fam_gambar"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:layout_marginTop="20dp"
+                android:id="@+id/fam_linbt"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:id="@+id/fam_btn_tolak"
+                    android:text="Not Approved"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:id="@+id/fam_btn_terima"
+                    android:text="Approved"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

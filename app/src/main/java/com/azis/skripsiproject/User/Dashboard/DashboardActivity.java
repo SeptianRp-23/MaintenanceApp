@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +31,9 @@ import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Server.Api;
 import com.azis.skripsiproject.User.Dashboard.Pengajuan.PilihPenggunaActivity;
 import com.azis.skripsiproject.User.Dashboard.Pengajuan.PengajuanFamumActivity;
+import com.azis.skripsiproject.User.Dashboard.User.ProfileActivity;
 import com.azis.skripsiproject.User.Laporan.LaporanActivity;
+import com.azis.skripsiproject.User.Proses.DetailsPengajuan.ProsesStatusDetail;
 import com.azis.skripsiproject.User.Proses.ProsesStatusActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -55,7 +59,6 @@ public class DashboardActivity extends AppCompatActivity {
     AdapterPengajuanUser adapterPengajuanUser;
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
     private String getPerbaikanBmn = Api.URL_API + "getPengajuanbyUser.php";
-//    private String getPerbaikanFamum = Api.URL_API + "getPengajuanbyUser.php";
     DataItemPengajuan dataItemPengajuan;
 
     @Override
@@ -76,6 +79,14 @@ public class DashboardActivity extends AppCompatActivity {
         myList = findViewById(R.id.list);
         adapterPengajuanUser = new AdapterPengajuanUser(this, dataItemPengajuanArrayList);
         myList.setAdapter(adapterPengajuanUser);
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                startActivity(new Intent(getApplicationContext(), ProsesStatusDetail.class)
+                        .putExtra("position", position));
+            }
+        });
 
         final String mId = user.get(SessionManager.ID);
         txtId.setText(mId);
@@ -138,7 +149,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                     case R.id. account:
                         startActivity(new Intent(getApplicationContext(),
-                                LaporanActivity.class));
+                                ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -150,12 +161,17 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void receiveDataBMN(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sedang Memuat Data . . .");
+//        loading.setVisibility(View.VISIBLE);
+        progressDialog.show();
         final String txtIDuser = txtId.getText().toString().trim();
         StringRequest request = new StringRequest(Request.Method.POST, getPerbaikanBmn,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dataItemPengajuanArrayList.clear();
+                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String sucess = jsonObject.getString("success");
@@ -181,6 +197,7 @@ public class DashboardActivity extends AppCompatActivity {
                                     String gambar = object.getString("gambar");
                                     String status = object.getString("status");
 
+                                    progressDialog.dismiss();
                                     dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
                                     dataItemPengajuanArrayList.add(dataItemPengajuan);
                                     adapterPengajuanUser.notifyDataSetChanged();
@@ -189,12 +206,14 @@ public class DashboardActivity extends AppCompatActivity {
                         }
                         catch (JSONException e){
                             e.printStackTrace();
+                            progressDialog.dismiss();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
                         Toast.makeText(DashboardActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -212,12 +231,17 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void receiveDataFAMUM(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sedang Memuat Data . . .");
+//        loading.setVisibility(View.VISIBLE);
+        progressDialog.show();
         final String txtIDuser = txtId.getText().toString().trim();
         StringRequest request = new StringRequest(Request.Method.POST, getPerbaikanBmn,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dataItemPengajuanArrayList.clear();
+                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String sucess = jsonObject.getString("success");
@@ -243,6 +267,7 @@ public class DashboardActivity extends AppCompatActivity {
                                     String gambar = object.getString("gambar");
                                     String status = object.getString("status");
 
+                                    progressDialog.dismiss();
                                     dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
                                     dataItemPengajuanArrayList.add(dataItemPengajuan);
                                     adapterPengajuanUser.notifyDataSetChanged();
@@ -251,12 +276,14 @@ public class DashboardActivity extends AppCompatActivity {
                         }
                         catch (JSONException e){
                             e.printStackTrace();
+                            progressDialog.dismiss();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
                         Toast.makeText(DashboardActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -314,43 +341,13 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (backPressedTime + 2000 > System.currentTimeMillis()){
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
             finish();
-            System.exit(0);
-        }
-        else {
+        } else {
             backToast = Toast.makeText(this, "Tekan Lagi Untuk Keluar", Toast.LENGTH_SHORT);
             backToast.show();
         }
         backPressedTime = System.currentTimeMillis();
-//        new AlertDialog.Builder(this)
-//                .setTitle("Really Exit?")
-//                .setMessage("Are you sure you want to exit?")
-//                .setNegativeButton(android.R.string.no, null)
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//
-//                    public void onClick(DialogInterface arg0, int arg1) {
-////                        MainActivity.super.onBackPressed();
-//                        Intent intent = new Intent(Intent.ACTION_MAIN);
-//                        intent.addCategory(Intent.CATEGORY_HOME);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        startActivity(intent);
-//                        finish();
-//                        System.exit(0);
-//                    }
-//                }).create().show();
-    }
-
-
-    private void logout(){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOut");
-        editor.apply();
-        startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-        finish();
     }
 }

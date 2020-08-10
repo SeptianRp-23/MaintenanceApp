@@ -188,7 +188,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:id="@+id/linear2"
-                android:visibility="gone">
+                android:visibility="visible">
 
 
                 <ImageView
@@ -219,33 +219,13 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />
 
-
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/et_uraian"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:met_floatingLabel="normal"
-                    android:hint="Uraian Kerusakan"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="1dp" />
-
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/et_kerusakan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:met_floatingLabel="normal"
-                    android:hint="Kerusakann"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="1dp" />
-
                 <RadioGroup
                     android:id="@+id/rg1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal" >
 
                     <RadioButton
@@ -263,6 +243,17 @@
                         android:text="Rusak Berat"/>
 
                 </RadioGroup>
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/et_uraian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
+                    android:hint="Detail Kerusakan"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
 

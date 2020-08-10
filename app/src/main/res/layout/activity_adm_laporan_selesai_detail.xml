@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.LaporPerbaikan.AdmLaporanSelesaiDetail">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detail Pekerjaan Selesai"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp"
+                android:id="@+id/card_dtl_1"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="ID Pekerjaan"
+                        android:id="@+id/dps_id"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Nama Pemohon"
+                        android:id="@+id/dps_nama"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Jenis"
+                        android:id="@+id/dps_jenis"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Di Perbaiki"
+                        android:id="@+id/dps_item"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Tanggal Selesai"
+                        android:id="@+id/dps_tanggal"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Biaya"
+                        android:id="@+id/dps_biaya"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Gambar"
+                        android:id="@+id/dps_gambar"
+                        android:layout_marginLeft="10dp"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/card_dtl_1"
+                android:id="@+id/btn_show"
+                android:text="Lihat Gambar"
+                android:textColor="@android:color/white"
+                android:background="@drawable/circle_primary"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/btn_show"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/gambar"/>
+
+            <ProgressBar
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_show"
+                android:layout_marginTop="20sp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/dps_progress"
+                android:backgroundTint="@color/colorPrimary"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/txt_keterangan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

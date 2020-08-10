@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bmn"
+        android:title="Barang Milik Negara"
+        android:icon="@drawable/ic_dashboard"/>
+    <item
+        android:id="@+id/famum"
+        android:title="Fasilitas Umum"
+        android:icon="@drawable/ic_history"/>
+
+</menu>

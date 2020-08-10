@@ -41,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPass;
     private Button btLogin;
     SessionManager sessionManager;
+    private long backPressedTime;
+    private Toast backToast;
     SharedPreferences sharedPreferences;
     CheckBox ceklist;
     RelativeLayout btRegist;
@@ -178,7 +180,18 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        progressDialog.dismiss();
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        } else {
+            backToast = Toast.makeText(this, "Tekan Lagi Untuk Keluar", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 
 //    private void Login(final String email, final String password) {
