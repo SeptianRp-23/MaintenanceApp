@@ -4,8 +4,8 @@
     <string name="register"><u>Register</u></string>
     <string name="DiTolak">Periksa Kembali Data Yang Di Ajukan, Beberapa Data Tidak Bisa Kami Terima, Pastikan Kesesuaian Barang yang Di Ajukan Dengan Foto Yang Di Upload. Terimakasih</string>
     <string-array name="daftar_list">
-        <item>Fasilitas 1</item>
-        <item>Fasilitas 2</item>
+        <item>Sarana</item>
+        <item>Pra-Sarana</item>
     </string-array>
 
     <string-array name="data_pokja">

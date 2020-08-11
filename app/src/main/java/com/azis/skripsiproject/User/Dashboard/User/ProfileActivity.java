@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.azis.skripsiproject.Admin.Dashboard.AdmDashboardActivity;
+import com.azis.skripsiproject.Admin.Laporan.AdmLaporanActivity;
 import com.azis.skripsiproject.Controller.DataItemAdmin;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.Login.LoginActivity;
@@ -69,7 +72,16 @@ public class ProfileActivity extends AppCompatActivity {
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logout();
+                final ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this);
+                progressDialog.setMessage("Tunggu Sebentar . . .");
+                progressDialog.show();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Logout();
+                    }
+                }, 3000);
             }
         });
 

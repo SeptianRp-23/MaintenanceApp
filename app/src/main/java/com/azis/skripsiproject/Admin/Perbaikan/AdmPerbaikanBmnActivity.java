@@ -2,6 +2,7 @@ package com.azis.skripsiproject.Admin.Perbaikan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -79,13 +80,16 @@ public class AdmPerbaikanBmnActivity extends AppCompatActivity {
     }
 
     public void receiveData(){
-
+        final ProgressDialog progressDialog = new ProgressDialog(AdmPerbaikanBmnActivity.this);
+        progressDialog.setMessage("Tunggu Sebentar . . .");
+        progressDialog.show();
         final TextView txtKosong=findViewById(R.id.txt_bmn_kosong);
         StringRequest request = new StringRequest(Request.Method.POST, ShowBarang,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dataItemPengajuanArrayList.clear();
+                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String sucess = jsonObject.getString("success");
@@ -111,6 +115,7 @@ public class AdmPerbaikanBmnActivity extends AppCompatActivity {
                                     String gambar = object.getString("gambar");
                                     String status = object.getString("status");
 
+                                    progressDialog.dismiss();
                                     txtKosong.setVisibility(View.GONE);
                                     dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
                                     dataItemPengajuanArrayList.add(dataItemPengajuan);
@@ -119,6 +124,7 @@ public class AdmPerbaikanBmnActivity extends AppCompatActivity {
                             }
                         }
                         catch (JSONException e){
+                            progressDialog.dismiss();
                             Toast.makeText(AdmPerbaikanBmnActivity.this, ""+e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -126,6 +132,7 @@ public class AdmPerbaikanBmnActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
                         Toast.makeText(AdmPerbaikanBmnActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })

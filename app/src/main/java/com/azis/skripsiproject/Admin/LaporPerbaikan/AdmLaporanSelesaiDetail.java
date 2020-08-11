@@ -51,7 +51,7 @@ public class AdmLaporanSelesaiDetail extends AppCompatActivity {
     Button showImage;
     ImageView image;
     ProgressBar contentLoadingProgressBar;
-    MaterialEditText mtID, mtNama, mtJenis, mtItem, mtTanggal, mtBiaya, mtGambar;
+    MaterialEditText mtID, mtNama, mtNamaPengguna, mtJenis, mtItem, mtTanggal, mtBiaya, mtGambar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +67,14 @@ public class AdmLaporanSelesaiDetail extends AppCompatActivity {
         mtGambar = findViewById(R.id.dps_gambar);
         showImage =  findViewById(R.id.btn_show);
         image =  findViewById(R.id.gambar);
+        mtNamaPengguna=findViewById(R.id.dps_nama_pengguna);
         contentLoadingProgressBar = findViewById(R.id.dps_progress);
 
         //SetData
         Intent intent = getIntent();
         position = intent.getExtras().getInt("position");
         getID = (AdmLaporanPerbaikan.dataItemPengajuanArrayList.get(position).getId());
+        mtNamaPengguna.setText(AdmLaporanPerbaikan.dataItemPengajuanArrayList.get(position).getNama());
 
         receiveData();
 

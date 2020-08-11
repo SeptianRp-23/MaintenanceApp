@@ -80,6 +80,7 @@ public class PengajuanBmnActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Pengajuan Perbaikan");
         setContentView(R.layout.activity_pengajuan_bmn);
 
         etIdUser = findViewById(R.id.et_idUser);
@@ -292,7 +293,6 @@ public class PengajuanBmnActivity extends AppCompatActivity {
                     Toast.makeText(PengajuanBmnActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
                     SaveEditDetail();
                     startActivity(new Intent(PengajuanBmnActivity.this, DashboardActivity.class));
-                    finish();
                 } else {
                     Toast.makeText(PengajuanBmnActivity.this, message, Toast.LENGTH_SHORT).show();
                 }

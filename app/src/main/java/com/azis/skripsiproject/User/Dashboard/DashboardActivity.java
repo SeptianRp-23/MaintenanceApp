@@ -97,7 +97,7 @@ public class DashboardActivity extends AppCompatActivity {
             txtBagian.setText("Perbaikan BMN");
         }
         else if (mbagian.equals("famum")){
-            txtBagian.setText("Perbaikan Fasilitas Umum");
+            txtBagian.setText("Perbaikan Fasilitas Kantor");
         }
 
         final String bagian = txtBagian.getText().toString().trim();
@@ -106,12 +106,13 @@ public class DashboardActivity extends AppCompatActivity {
 //            receiveDataBMN();
             receiveDataBMN();
         }
-        else if (bagian.equals("Perbaikan Fasilitas Umum")){
+        else if (bagian.equals("Perbaikan Fasilitas Kantor")){
             cFamum.setVisibility(View.VISIBLE);
             receiveDataFAMUM();
 //            receiveDataBMN();
         }
         //end check
+
 
         cBmn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +161,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
-    private void receiveDataBMN(){
+    public void receiveDataBMN(){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Sedang Memuat Data . . .");
 //        loading.setVisibility(View.VISIBLE);
@@ -230,7 +231,7 @@ public class DashboardActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    private void receiveDataFAMUM(){
+    public void receiveDataFAMUM(){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Sedang Memuat Data . . .");
 //        loading.setVisibility(View.VISIBLE);

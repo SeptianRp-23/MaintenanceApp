@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class AdmLaporanPerbaikan extends AppCompatActivity {
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
     private String ShowBarang = Api.URL_API + "getPengajuanSelesai.php";
     DataItemPengajuan dataItemPengajuan;
+    ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,14 @@ public class AdmLaporanPerbaikan extends AppCompatActivity {
         myList = findViewById(R.id.list);
         adapterPengajuanProses = new AdapterLaporan(this, dataItemPengajuanArrayList);
         myList.setAdapter(adapterPengajuanProses);
+        imgBack=findViewById(R.id.back);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdmLaporanPerbaikan.this, AdmDashboardActivity.class));
+                overridePendingTransition(0,0);
+            }
+        });
 
         receiveData();
 

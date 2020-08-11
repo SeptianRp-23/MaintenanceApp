@@ -188,7 +188,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:id="@+id/linear2"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <ImageView
@@ -321,6 +321,7 @@
                     app:met_floatingLabel="normal"
                     android:hint="Perkiraan Biaya"
                     android:id="@+id/biaya"
+                    android:inputType="numberDecimal"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="1dp" />

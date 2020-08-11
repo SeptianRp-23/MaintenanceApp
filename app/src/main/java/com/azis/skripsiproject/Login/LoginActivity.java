@@ -26,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.azis.skripsiproject.Admin.Dashboard.AdmDashboardActivity;
 import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Controller.SessionManager;
+import com.azis.skripsiproject.Register.RegisterActivity;
 import com.azis.skripsiproject.Server.Api;
 import com.azis.skripsiproject.User.Dashboard.DashboardActivity;
 
@@ -64,6 +65,13 @@ public class LoginActivity extends AppCompatActivity {
         ceklist = findViewById(R.id.state);
         btRegist = findViewById(R.id.register);
 
+        btRegist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                overridePendingTransition(0,0);
+            }
+        });
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override

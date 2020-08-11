@@ -80,7 +80,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="Masuk"
                 android:textAllCaps="false"
                 android:background="@drawable/circle_primary"
                 android:textColor="#fff"
@@ -93,16 +93,16 @@
                 tools:ignore="HardcodedText" />
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/register">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/register"
+                    android:text="Daftar"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>

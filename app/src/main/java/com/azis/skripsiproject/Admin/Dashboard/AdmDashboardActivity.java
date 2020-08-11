@@ -28,6 +28,7 @@ import com.azis.skripsiproject.Admin.Profile.AdmAkunActivity;
 import com.azis.skripsiproject.Controller.SessionManager;
 import com.azis.skripsiproject.Login.LoginActivity;
 import com.azis.skripsiproject.R;
+import com.azis.skripsiproject.User.Dashboard.User.ProfileActivity;
 
 import java.util.HashMap;
 
@@ -115,7 +116,16 @@ public class AdmDashboardActivity extends AppCompatActivity {
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logout();
+                final ProgressDialog progressDialog = new ProgressDialog(AdmDashboardActivity.this);
+                progressDialog.setMessage("Tunggu Sebentar . . .");
+                progressDialog.show();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        logout();
+                    }
+                }, 3000);
             }
         });
 

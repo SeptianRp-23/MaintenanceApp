@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Admin.Laporan.PdfViewerActivity"></activity>
+        <activity android:name=".Register.RegisterActivity"
+            android:theme="@style/Custom"></activity>
+        <activity android:name=".Admin.Laporan.PdfViewerActivity" />
         <activity android:name=".Admin.Laporan.PDFActivity" />
         <activity
             android:name=".Admin.LaporPerbaikan.AdmLaporanSelesaiDetail"

@@ -117,8 +117,8 @@ public class PDFActivity extends AppCompatActivity {
                         }
                     }, 2000);
                 }
-                else if (title.equals("Pengajuan_Famum")){
-                    DownloadBooks("https://mydbskripsi.000webhostapp.com/files/Pengajuan_Famum.pdf","Pengajuan_Famum");
+                else if (title.equals("Pengajuan_Faskan")){
+                    DownloadBooks("https://mydbskripsi.000webhostapp.com/files/Pengajuan_Famum.pdf","Pengajuan_Faskan");
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -129,7 +129,7 @@ public class PDFActivity extends AppCompatActivity {
                     }, 2000);
                 }
                 else if (title.equals("Pengguna_Aplikasi")){
-                    DownloadBooks("https://mydbskripsi.000webhostapp.com/files/Semua_Pengajuan.pdf","Pengguna_Aplikasi");
+                    DownloadBooks("https://mydbskripsi.000webhostapp.com/files/Pengguna_App.pdf","Pengguna_Aplikasi");
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {

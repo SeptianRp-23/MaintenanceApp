@@ -30,8 +30,8 @@ public class AdmLaporanActivity extends AppCompatActivity {
         list.add(new PDFModel("Penggunaan_Barang","https://mydbskripsi.000webhostapp.com/files/Pengguna_Barang.pdf"));
         list.add(new PDFModel("Data_Barang", "https://mydbskripsi.000webhostapp.com/files/Data_Barang.pdf"));
         list.add(new PDFModel("Pengajuan_Bmn", "https://mydbskripsi.000webhostapp.com/files/Pengajuan_Bmn.pdf"));
-        list.add(new PDFModel("Pengajuan_Famum", "https://mydbskripsi.000webhostapp.com/files/Pengajuan_Famum.pdf"));
-        list.add(new PDFModel("Pengguna_Aplikasi", "https://mydbskripsi.000webhostapp.com/files/Semua_Pengajuan.pdf"));
+        list.add(new PDFModel("Pengajuan_Faskan", "https://mydbskripsi.000webhostapp.com/files/Pengajuan_Famum.pdf"));
+        list.add(new PDFModel("Pengguna_Aplikasi", "https://mydbskripsi.000webhostapp.com/files/Pengguna_App.pdf"));
         list.add(new PDFModel("Pekerjaan_Selesai", "https://mydbskripsi.000webhostapp.com/files/Tugas_Selesai.pdf"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(AdmLaporanActivity.this, 2));

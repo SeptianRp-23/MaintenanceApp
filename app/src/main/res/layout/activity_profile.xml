@@ -171,7 +171,7 @@
         android:layout_marginBottom="20dp"
         android:layout_above="@+id/buttom_navigation"
         android:layout_marginTop="20dp"
-        android:text="Logout"
+        android:text="Keluar"
         android:textColor="@android:color/white"
         android:id="@+id/btn_logout"/>
 

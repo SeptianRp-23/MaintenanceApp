@@ -107,6 +107,7 @@
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
                         android:hint="Jenis Barang"
+                        android:enabled="false"
                         android:textAlignment="center"
                         android:id="@+id/selesai_et_jenis_brg"/>
 
@@ -115,6 +116,7 @@
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
                         android:hint="Item Kerusakan"
+                        android:enabled="false"
                         android:textAlignment="center"
                         android:id="@+id/selesai_et_tipe_brg"/>
 
@@ -125,6 +127,7 @@
                         android:hint="Jenis Kerusakan"
                         android:textAlignment="center"
                         android:layout_marginTop="5dp"
+                        android:enabled="false"
                         android:id="@+id/selesai_et_kerusakan"/>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
@@ -134,6 +137,7 @@
                         android:hint="Detail Kerusakan"
                         android:textAlignment="center"
                         android:layout_marginTop="5dp"
+                        android:enabled="false"
                         android:id="@+id/selesai_et_detail_kerusakan"/>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
@@ -143,6 +147,7 @@
                         android:hint="Detail Pekerjaan"
                         android:textAlignment="center"
                         android:layout_marginTop="5dp"
+                        android:enabled="false"
                         android:id="@+id/selesai_et_pekerjaan"/>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
@@ -151,6 +156,7 @@
                         app:met_floatingLabel="normal"
                         android:hint="Biaya Pekerjaan"
                         android:textAlignment="center"
+                        android:enabled="false"
                         android:layout_marginTop="5dp"
                         android:id="@+id/selesai_et_biaya_pekerjaan"/>
 

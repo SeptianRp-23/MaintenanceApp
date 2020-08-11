@@ -71,6 +71,7 @@ public class PengajuanFamumActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Pengajuan Perbaikan");
         setContentView(R.layout.activity_pengajuan_famum);
 
         etIdUser = findViewById(R.id.et_idUser);

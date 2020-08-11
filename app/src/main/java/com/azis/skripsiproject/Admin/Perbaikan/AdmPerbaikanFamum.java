@@ -2,6 +2,7 @@ package com.azis.skripsiproject.Admin.Perbaikan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -78,12 +79,16 @@ public class AdmPerbaikanFamum extends AppCompatActivity {
     }
 
     public void receiveData(){
+        final ProgressDialog progressDialog = new ProgressDialog(AdmPerbaikanFamum.this);
+        progressDialog.setMessage("Tunggu Sebentar . . .");
+        progressDialog.show();
         final TextView txtKosong=findViewById(R.id.txt_famum_kosong);
         StringRequest request = new StringRequest(Request.Method.POST, ShowBarang,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         dataItemPengajuanArrayList.clear();
+                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String sucess = jsonObject.getString("success");
@@ -109,6 +114,7 @@ public class AdmPerbaikanFamum extends AppCompatActivity {
                                     String gambar = object.getString("gambar");
                                     String status = object.getString("status");
 
+                                    progressDialog.dismiss();
                                     txtKosong.setVisibility(View.GONE);
                                     dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
                                     dataItemPengajuanArrayList.add(dataItemPengajuan);
@@ -117,13 +123,15 @@ public class AdmPerbaikanFamum extends AppCompatActivity {
                             }
                         }
                         catch (JSONException e){
-                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(AdmPerbaikanFamum.this, "Error"+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
                         Toast.makeText(AdmPerbaikanFamum.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 })

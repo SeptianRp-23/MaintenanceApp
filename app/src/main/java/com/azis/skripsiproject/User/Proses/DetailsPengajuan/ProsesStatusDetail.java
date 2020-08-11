@@ -198,7 +198,8 @@ public class ProsesStatusDetail extends AppCompatActivity {
 
                             if (success.equals("1")){
                                 Toast.makeText(ProsesStatusDetail.this, "Success!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ProsesStatusDetail.this, DashboardActivity.class));
+                                Intent intent = new Intent(ProsesStatusDetail.this, DashboardActivity.class);
+                                startActivity(intent);
 //                                sessionManager.createSession(email, name, id);
                                 System.out.println("Berhasil");
                             }

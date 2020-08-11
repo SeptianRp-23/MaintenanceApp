@@ -189,7 +189,7 @@
                     android:layout_height="60dp"
                     android:backgroundTint="@android:color/holo_red_dark"
                     android:id="@+id/fam_btn_tolak"
-                    android:text="Not Approved"
+                    android:text="Tidak Di Setujui"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>
 
@@ -198,7 +198,7 @@
                     android:layout_height="60dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:id="@+id/fam_btn_terima"
-                    android:text="Approved"
+                    android:text="Di Setujui"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>
 

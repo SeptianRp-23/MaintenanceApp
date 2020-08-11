@@ -122,6 +122,7 @@
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
                         android:hint="Jenis Perbaikan"
+                        android:enabled="false"
                         android:textAlignment="center"
                         android:id="@+id/et_jenis_brg"/>
 
@@ -130,6 +131,7 @@
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
                         android:hint="Item Kerusakan"
+                        android:enabled="false"
                         android:textAlignment="center"
                         android:id="@+id/et_tipe_brg"/>
 
@@ -139,6 +141,7 @@
                         app:met_floatingLabel="normal"
                         android:hint="Keterangan Kerusakan"
                         android:textAlignment="center"
+                        android:enabled="false"
                         android:layout_marginTop="5dp"
                         android:id="@+id/et_kerusakan"/>
 
@@ -147,6 +150,7 @@
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
                         android:hint="Detail Keterangan"
+                        android:enabled="false"
                         android:textAlignment="center"
                         android:layout_marginTop="5dp"
                         android:id="@+id/et_detail_keterangan"/>
