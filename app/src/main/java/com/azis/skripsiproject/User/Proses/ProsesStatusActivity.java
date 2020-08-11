@@ -68,14 +68,6 @@ public class ProsesStatusActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         getID = user.get(SessionManager.ID);
 
-        final LinearLayout btLapor = findViewById(R.id.lin_lapor);
-        btLapor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //
-            }
-        });
-
         myList = findViewById(R.id.list);
         adapterPengajuanUser = new AdapterPengajuanProses(this, dataItemPengajuanArrayList);
         myList.setAdapter(adapterPengajuanUser);

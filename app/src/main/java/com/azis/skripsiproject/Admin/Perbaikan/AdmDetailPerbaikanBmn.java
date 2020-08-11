@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.azis.skripsiproject.Admin.Dashboard.AdmDashboardActivity;
 import com.azis.skripsiproject.R;
 import com.azis.skripsiproject.Server.Api;
 import com.bumptech.glide.Glide;
@@ -180,7 +181,7 @@ public class AdmDetailPerbaikanBmn extends AppCompatActivity {
 
                             if (success.equals("1")){
                                 Toast.makeText(AdmDetailPerbaikanBmn.this, "Success!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(AdmDetailPerbaikanBmn.this, AdmPerbaikanBmnActivity.class));
+                                startActivity(new Intent(AdmDetailPerbaikanBmn.this, AdmDashboardActivity.class));
 //                                sessionManager.createSession(email, name, id);
                                 System.out.println("Berhasil");
                             }

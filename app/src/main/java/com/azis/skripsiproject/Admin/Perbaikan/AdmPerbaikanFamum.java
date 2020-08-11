@@ -43,6 +43,7 @@ public class AdmPerbaikanFamum extends AppCompatActivity {
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
     private String ShowBarang = Api.URL_API + "getPengajuanFamum.php";
     DataItemPengajuan dataItemPengajuan;
+    TextView  textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class AdmPerbaikanFamum extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         getId = user.get(SessionManager.ID);
+        textView = findViewById(R.id.txt_famum_kosong);
 
         myList = findViewById(R.id.listfamum);
         adapterPengajuanProses = new AdapterPengajuanProses(this, dataItemPengajuanArrayList);
@@ -115,10 +117,15 @@ public class AdmPerbaikanFamum extends AppCompatActivity {
                                     String status = object.getString("status");
 
                                     progressDialog.dismiss();
-                                    txtKosong.setVisibility(View.GONE);
-                                    dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
-                                    dataItemPengajuanArrayList.add(dataItemPengajuan);
-                                    adapterPengajuanProses.notifyDataSetChanged();
+                                    if (jsonArray.length() == 0){
+                                        textView.setVisibility(View.VISIBLE);
+                                    }
+                                    else {
+                                        textView.setVisibility(View.GONE);
+                                        dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
+                                        dataItemPengajuanArrayList.add(dataItemPengajuan);
+                                        adapterPengajuanProses.notifyDataSetChanged();
+                                    }
                                 }
                             }
                         }

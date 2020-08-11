@@ -60,6 +60,7 @@ public class DashboardActivity extends AppCompatActivity {
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
     private String getPerbaikanBmn = Api.URL_API + "getPengajuanbyUser.php";
     DataItemPengajuan dataItemPengajuan;
+    TextView txtKosong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,9 +200,9 @@ public class DashboardActivity extends AppCompatActivity {
                                     String status = object.getString("status");
 
                                     progressDialog.dismiss();
-                                    dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
-                                    dataItemPengajuanArrayList.add(dataItemPengajuan);
-                                    adapterPengajuanUser.notifyDataSetChanged();
+                                        dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
+                                        dataItemPengajuanArrayList.add(dataItemPengajuan);
+                                        adapterPengajuanUser.notifyDataSetChanged();
                                 }
                             }
                         }
@@ -269,9 +270,9 @@ public class DashboardActivity extends AppCompatActivity {
                                     String status = object.getString("status");
 
                                     progressDialog.dismiss();
-                                    dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
-                                    dataItemPengajuanArrayList.add(dataItemPengajuan);
-                                    adapterPengajuanUser.notifyDataSetChanged();
+                                        dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
+                                        dataItemPengajuanArrayList.add(dataItemPengajuan);
+                                        adapterPengajuanUser.notifyDataSetChanged();
                                 }
                             }
                         }

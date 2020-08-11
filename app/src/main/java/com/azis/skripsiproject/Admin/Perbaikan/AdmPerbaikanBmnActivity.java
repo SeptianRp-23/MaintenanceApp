@@ -43,6 +43,7 @@ public class AdmPerbaikanBmnActivity extends AppCompatActivity {
     public static ArrayList<DataItemPengajuan> dataItemPengajuanArrayList = new ArrayList<>();
     private String ShowBarang = Api.URL_API + "getPengajuanAdm.php";
     DataItemPengajuan dataItemPengajuan;
+    TextView  textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class AdmPerbaikanBmnActivity extends AppCompatActivity {
         myList = findViewById(R.id.list);
         adapterPengajuanProses = new AdapterPengajuanProses(this, dataItemPengajuanArrayList);
         myList.setAdapter(adapterPengajuanProses);
+        textView = findViewById(R.id.txt_bmn_kosong);
 
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +85,6 @@ public class AdmPerbaikanBmnActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(AdmPerbaikanBmnActivity.this);
         progressDialog.setMessage("Tunggu Sebentar . . .");
         progressDialog.show();
-        final TextView txtKosong=findViewById(R.id.txt_bmn_kosong);
         StringRequest request = new StringRequest(Request.Method.POST, ShowBarang,
                 new Response.Listener<String>() {
                     @Override
@@ -116,10 +117,15 @@ public class AdmPerbaikanBmnActivity extends AppCompatActivity {
                                     String status = object.getString("status");
 
                                     progressDialog.dismiss();
-                                    txtKosong.setVisibility(View.GONE);
-                                    dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
-                                    dataItemPengajuanArrayList.add(dataItemPengajuan);
-                                    adapterPengajuanProses.notifyDataSetChanged();
+                                    if (jsonArray.length() == 0){
+                                        textView.setVisibility(View.VISIBLE);
+                                    }
+                                    else{
+                                        textView.setVisibility(View.GONE);
+                                        dataItemPengajuan = new DataItemPengajuan(id, id_user, nama_user, id_barang, jenis, tipe, nama, pokja, kerusakan, uraian, tanggal, keterangan, biaya, gambar, status);
+                                        dataItemPengajuanArrayList.add(dataItemPengajuan);
+                                        adapterPengajuanProses.notifyDataSetChanged();
+                                    }
                                 }
                             }
                         }
