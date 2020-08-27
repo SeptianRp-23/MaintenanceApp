@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -69,12 +70,19 @@ public class ProfileActivity extends AppCompatActivity {
         txtAlamat =  findViewById(R.id.txt_alamat_user);
         Logout = findViewById(R.id.btn_logout);
 
+
+        final MediaPlayer mpmulai = MediaPlayer.create(this, R.raw.keluaraplikasi);
+        final MediaPlayer utama = MediaPlayer.create(this, R.raw.menuutama);
+        final MediaPlayer proses = MediaPlayer.create(this, R.raw.menuproses);
+        final MediaPlayer profile = MediaPlayer.create(this, R.raw.menuprofile);
+
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this);
                 progressDialog.setMessage("Tunggu Sebentar . . .");
                 progressDialog.show();
+                mpmulai.start();
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -93,12 +101,14 @@ public class ProfileActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.dashboard:
+                        utama.start();
                         startActivity(new Intent(getApplicationContext(),
                                 DashboardActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.status:
+                        proses.start();
                         startActivity(new Intent(getApplicationContext(),
                                 ProsesStatusActivity.class));
                         overridePendingTransition(0,0);

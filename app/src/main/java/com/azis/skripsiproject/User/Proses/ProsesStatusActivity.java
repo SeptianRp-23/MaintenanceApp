@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,6 +89,11 @@ public class ProsesStatusActivity extends AppCompatActivity {
 
         receiveData();
 
+
+        final MediaPlayer utama = MediaPlayer.create(this, R.raw.menuutama);
+        final MediaPlayer proses = MediaPlayer.create(this, R.raw.menuproses);
+        final MediaPlayer profile = MediaPlayer.create(this, R.raw.menuprofile);
+
         //ButtomNav
         BottomNavigationView bottomNavigationView = findViewById(R.id.buttom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.status);
@@ -96,6 +102,7 @@ public class ProsesStatusActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.dashboard:
+                        utama.start();
                         startActivity(new Intent(getApplicationContext(),
                                 DashboardActivity.class));
                         overridePendingTransition(0,0);
@@ -108,6 +115,7 @@ public class ProsesStatusActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.account:
+                        profile.start();
                         startActivity(new Intent(getApplicationContext(),
                                 ProfileActivity.class));
                         overridePendingTransition(0,0);

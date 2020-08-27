@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -66,9 +67,18 @@ public class AdmDashboardActivity extends AppCompatActivity {
         card4 = findViewById(R.id.card_laporan);
         btProfil = findViewById(R.id.profile);
 
+
+        final MediaPlayer laporan = MediaPlayer.create(this, R.raw.laporan);
+        final MediaPlayer profile = MediaPlayer.create(this, R.raw.menuprofile);
+        final MediaPlayer perbaikanbmn = MediaPlayer.create(this, R.raw.menupengajuanperbaikan);
+        final MediaPlayer peminjaman = MediaPlayer.create(this, R.raw.penggunaanbmn);
+        final MediaPlayer laporanperbaikan = MediaPlayer.create(this, R.raw.menulaporanperbaikan);
+        final MediaPlayer keluar = MediaPlayer.create(this, R.raw.keluaraplikasi);
+
         btProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                profile.start();
                 startActivity(new Intent(AdmDashboardActivity.this, AdmAkunActivity.class));
             }
         });
@@ -76,6 +86,7 @@ public class AdmDashboardActivity extends AppCompatActivity {
         card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                perbaikanbmn.start();
                 startActivity(new Intent(AdmDashboardActivity.this, AdmPerbaikanBmnActivity.class));
             }
         });
@@ -83,6 +94,7 @@ public class AdmDashboardActivity extends AppCompatActivity {
         card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                peminjaman.start();
                 startActivity(new Intent(AdmDashboardActivity.this, AdmPeminjamanActivity.class));
             }
         });
@@ -90,6 +102,7 @@ public class AdmDashboardActivity extends AppCompatActivity {
         card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                laporanperbaikan.start();
                 startActivity(new Intent(AdmDashboardActivity.this, AdmLaporanPerbaikan.class));
             }
         });
@@ -98,6 +111,7 @@ public class AdmDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CreatePDF();
+                laporan.start();
                 final ProgressDialog progressDialog = new ProgressDialog(AdmDashboardActivity.this);
                 progressDialog.setMessage("Tunggu Sebentar . . .");
                 progressDialog.show();
@@ -116,6 +130,7 @@ public class AdmDashboardActivity extends AppCompatActivity {
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                keluar.start();
                 final ProgressDialog progressDialog = new ProgressDialog(AdmDashboardActivity.this);
                 progressDialog.setMessage("Tunggu Sebentar . . .");
                 progressDialog.show();

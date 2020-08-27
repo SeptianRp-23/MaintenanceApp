@@ -77,7 +77,6 @@
         <activity
             android:name=".User.Proses.DetailsPengajuan.ProsesStatusDetail"
             android:theme="@style/Custom" />
-        <activity android:name=".SplashActivity" />
         <activity
             android:name=".User.Proses.ProsesStatusActivity"
             android:theme="@style/Custom" />
@@ -93,6 +92,10 @@
             android:theme="@style/Custom" />
         <activity
             android:name=".Login.LoginActivity"
+            android:theme="@style/Custom"/>
+
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/Custom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

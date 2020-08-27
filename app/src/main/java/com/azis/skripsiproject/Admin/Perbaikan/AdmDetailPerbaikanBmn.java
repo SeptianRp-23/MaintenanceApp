@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -92,9 +93,12 @@ public class AdmDetailPerbaikanBmn extends AppCompatActivity {
             }
         });
 
+
+        final MediaPlayer lihat = MediaPlayer.create(this, R.raw.lihatgambar);
         final LinearLayout btlayout = findViewById(R.id.linbt);
         btnShow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
+                lihat.start();
                 btnShow.setVisibility(View.GONE);
                 contentLoadingProgressBar.setVisibility(View.VISIBLE);
                 final String URL = noGambar.getText().toString().trim();

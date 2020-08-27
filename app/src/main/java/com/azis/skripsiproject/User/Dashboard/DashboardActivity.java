@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -101,6 +102,7 @@ public class DashboardActivity extends AppCompatActivity {
             txtBagian.setText("Perbaikan Fasilitas Kantor");
         }
 
+        final MediaPlayer mpbmn = MediaPlayer.create(this, R.raw.laporkerusakan);
         final String bagian = txtBagian.getText().toString().trim();
         if (bagian.equals("Perbaikan BMN")){
             cBmn.setVisibility(View.VISIBLE);
@@ -119,6 +121,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashboardActivity.this, PilihPenggunaActivity.class));
+                mpbmn.start();
             }
         });
 
@@ -126,10 +129,15 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashboardActivity.this, PengajuanFamumActivity.class));
+                mpbmn.start();
             }
         });
 
 
+
+        final MediaPlayer utama = MediaPlayer.create(this, R.raw.menuutama);
+        final MediaPlayer proses = MediaPlayer.create(this, R.raw.menuproses);
+        final MediaPlayer profile = MediaPlayer.create(this, R.raw.menuprofile);
         //ButtomNav
         BottomNavigationView bottomNavigationView = findViewById(R.id.buttom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.dashboard);
@@ -144,12 +152,14 @@ public class DashboardActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.status:
+                        proses.start();
                         startActivity(new Intent(getApplicationContext(),
                                 ProsesStatusActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id. account:
+                        profile.start();
                         startActivity(new Intent(getApplicationContext(),
                                 ProfileActivity.class));
                         overridePendingTransition(0,0);

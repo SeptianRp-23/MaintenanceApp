@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -88,10 +89,12 @@ public class AdmDetailPerbaikanFamum extends AppCompatActivity {
             }
         });
 
+        final MediaPlayer lihat = MediaPlayer.create(this, R.raw.lihatgambar);
         final LinearLayout btlayout = findViewById(R.id.fam_linbt);
         btShow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 btShow.setVisibility(View.GONE);
+                lihat.start();
                 contentLoadingProgressBar.setVisibility(View.VISIBLE);
                 final String URL = linkGambar.getText().toString().trim();
                 String U_R_L = Api.URL_IMAGE+URL;

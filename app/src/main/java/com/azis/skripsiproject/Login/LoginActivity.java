@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -101,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginProces(final String email, final String password) {
+        final MediaPlayer mpmulai = MediaPlayer.create(this, R.raw.berhasil);
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         final Handler handler = new Handler();
         progressDialog.setCancelable(false);
@@ -127,6 +129,9 @@ public class LoginActivity extends AppCompatActivity {
                                             String bagian = object.getString("bagian").trim();
                                             String level = object.getString("level").trim();
                                             String id = object.getString("id").trim();
+
+
+                                            mpmulai.start();
 
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
                                             if (ceklist.isChecked() && level.equals("user")){

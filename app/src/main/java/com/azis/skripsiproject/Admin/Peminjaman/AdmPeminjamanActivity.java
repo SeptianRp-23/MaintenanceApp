@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -71,9 +72,12 @@ public class AdmPeminjamanActivity extends AppCompatActivity {
         txtKembali = findViewById(R.id.txtKembali);
         txtReady = findViewById(R.id.txtReady);
 
+
+        final MediaPlayer lihat = MediaPlayer.create(this, R.raw.tambahdata);
         cardTambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                lihat.start();
                 startActivity(new Intent(AdmPeminjamanActivity.this, PilihBarangActivity.class));
             }
         });

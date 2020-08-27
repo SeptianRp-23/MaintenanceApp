@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -196,9 +197,12 @@ public class PengajuanBmnActivity extends AppCompatActivity {
             }
         });
 
+
+        final MediaPlayer utama = MediaPlayer.create(this, R.raw.ambilgambar);
         btChose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                utama.start();
                 chooseFile();
             }
         });
